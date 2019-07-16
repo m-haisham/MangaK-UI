@@ -55,6 +55,7 @@ class ThreadedSearch(object):
         self.search['progress_bar'].hide()
 
     def _search_to_manga_download(self):
+        self.search['next_button'].setEnabled(False)
         selected_index = self.search['table'].selectedIndexes()[0].row()
         self.load_manga(self.codec.search_result[selected_index]['href'])
 

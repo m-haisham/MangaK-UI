@@ -76,7 +76,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -481,6 +481,41 @@
                 </spacer>
                </item>
                <item>
+                <widget class="QLabel" name="progressTitleLabel">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QLabel" name="totalDownloadProgressLabel">
                  <property name="font">
                   <font>
@@ -502,11 +537,20 @@
                </item>
                <item>
                 <widget class="QProgressBar" name="totalDownloadProgressBar">
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>0</number>
+                 </property>
                  <property name="value">
-                  <number>24</number>
+                  <number>0</number>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="format">
+                  <string>%v of %m chapters | %p%</string>
                  </property>
                 </widget>
                </item>
@@ -548,11 +592,20 @@
                </item>
                <item>
                 <widget class="QProgressBar" name="chapterDownloadProgressBar">
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>0</number>
+                 </property>
                  <property name="value">
-                  <number>42</number>
+                  <number>-1</number>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="format">
+                  <string>%v of %m pages | %p%</string>
                  </property>
                 </widget>
                </item>
@@ -594,11 +647,51 @@
                </item>
                <item>
                 <widget class="QProgressBar" name="pageDownloadProgressBar">
+                 <property name="maximum">
+                  <number>0</number>
+                 </property>
                  <property name="value">
-                  <number>63</number>
+                  <number>-1</number>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="format">
+                  <string>%v of %m bytes | %p%</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="compositingLabel">
+                 <property name="font">
+                  <font>
+                   <pointsize>9</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -654,11 +747,17 @@
      <string>Setting</string>
     </property>
     <widget class="QMenu" name="menuComposition">
+     <property name="tearOffEnabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Composition</string>
      </property>
-     <addaction name="actionJpg_2"/>
-     <addaction name="actionPdf_2"/>
+     <property name="separatorsCollapsible">
+      <bool>false</bool>
+     </property>
+     <addaction name="actionCompositeJpg"/>
+     <addaction name="actionCompositePdf"/>
     </widget>
     <addaction name="menuComposition"/>
     <addaction name="actionKeep_originals"/>
@@ -693,11 +792,14 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Keep originals</string>
    </property>
   </action>
-  <action name="actionJpg_2">
+  <action name="actionCompositeJpg">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -705,7 +807,7 @@
     <string>Jpg</string>
    </property>
   </action>
-  <action name="actionPdf_2">
+  <action name="actionCompositePdf">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -716,6 +818,11 @@
   <action name="actionGenerate">
    <property name="text">
     <string>Generate</string>
+   </property>
+  </action>
+  <action name="actionSettingsApply">
+   <property name="text">
+    <string>Apply</string>
    </property>
   </action>
  </widget>
