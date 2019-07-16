@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-
 from PyQt5 import uic
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+
 
 class MKCodec(QObject):
     finished = pyqtSignal()
@@ -53,7 +53,6 @@ class MKCodec(QObject):
         count = 0
         while True:
             key = self.keyword+self.search_postfix+str(count+1)
-            print(key)
             if count != 0:
                 r = requests.get(key)
                 soup = BeautifulSoup(r.content, 'html.parser')
@@ -80,5 +79,3 @@ class MKCodec(QObject):
                 'last_chapter': result.find_all('em', {'class': 'story_chapter'})[0].text.strip('\n'),
                 'href': result.find('a')['href']
                 })
-
-        
