@@ -27,8 +27,7 @@ class ThreadedSearch(object):
     def _search(self):
 
         # disable controls
-        self.search['input'].setEnabled(False)
-        self.search['search_button'].setEnabled(False)
+        self._set_controls(False)
 
         self.codec.keyword = self.codec.search_prefix + self.search['input'].text()
 
@@ -52,7 +51,14 @@ class ThreadedSearch(object):
             self.search['table'].setItem(i, 1, QTableWidgetItem(manga['last_chapter']))
 
         # enable controls
-        self.search['input'].setEnabled(True)
-        self.search['search_button'].setEnabled(True)
+        self._set_controls(True)
         self.search['progress_bar'].hide()
-        print('search done')
+
+    def _search_to_manga_download(self):
+        selected_index = self.search['table'].selectedIndexes()[0].row()
+        self.load_manga(self.codec.search_result[selected_index]['href'])
+
+    def _set_controls(self, is_active):
+        self.search['input'].setEnabled(is_active)
+        self.search['search_button'].setEnabled(is_active)
+        self.search['next_button'].setEnabled(is_active)

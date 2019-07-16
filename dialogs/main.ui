@@ -23,7 +23,7 @@
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
         <item>
-         <widget class="QPushButton" name="SearchButton">
+         <widget class="QPushButton" name="searchNavButton">
           <property name="text">
            <string>Search</string>
           </property>
@@ -36,7 +36,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="DirectButton">
+         <widget class="QPushButton" name="directNavButton">
           <property name="text">
            <string>URL</string>
           </property>
@@ -49,7 +49,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="ViewButton">
+         <widget class="QPushButton" name="viewFunButton">
           <property name="text">
            <string>Browser</string>
           </property>
@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -365,7 +365,7 @@
              <item row="0" column="0">
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <item alignment="Qt::AlignHCenter">
-                <widget class="QLabel" name="label">
+                <widget class="QLabel" name="mangaTitle">
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
@@ -390,7 +390,7 @@
                  <item>
                   <widget class="QPushButton" name="inverseSelectedMangaButton">
                    <property name="text">
-                    <string>Inverse</string>
+                    <string>Inverse selection</string>
                    </property>
                   </widget>
                  </item>
@@ -428,6 +428,16 @@
                 <widget class="QPushButton" name="selectedMangaDownloadButton">
                  <property name="text">
                   <string>Download</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="mangaDataLoadProgressBar">
+                 <property name="value">
+                  <number>24</number>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
