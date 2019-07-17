@@ -10,12 +10,19 @@ from modules.settings import Settings
 from ui.mangaDownloading import ThreadedMangaDownload
 from ui.mangaLoading import ThreadedMangaLoad
 from ui.search import ThreadedSearch
+from ui.tree_gen import ThreadedTreeGenerate
+from ui.web import ThreadedWebGenerate
 
+from dialogs.main import Ui_MainWindow
 
-class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload):
+from modules.html import HtmlManager
+
+class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate, ThreadedWebGenerate):
     def __init__(self):
         super(Ui, self).__init__()
         uic.loadUi('dialogs/main.ui', self)
+
+        # Ui_MainWindow().setupUi(self)
 
         self.settings = Settings()
 
@@ -30,6 +37,9 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload):
             'settings_apply': self.findChild(QAction, 'actionSettingsApply'),
             'help': self.findChild(QAction, 'actionHelp'),
         }
+
+        self.navbar['exit'].triggered.connect(self.close)
+        self.navbar['generate_tree'].triggered.connect(self.on_generate_clicked)
 
         self.navbar['composite_jpg'].setChecked(self.settings.settings['composite_jpg'])
         self.navbar['composite_pdf'].setChecked(self.settings.settings['composite_pdf'])
@@ -47,6 +57,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload):
         
         self.navigation['search'].clicked.connect(lambda : self.stack.setCurrentIndex(0))
         self.navigation['direct'].clicked.connect(lambda : self.stack.setCurrentIndex(1))
+        self.navigation['browser'].clicked.connect(self.on_browser_clicked)
 
         self.search = {
             'input': self.findChild(QLineEdit, 'searchInputBox'),

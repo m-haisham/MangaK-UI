@@ -7,6 +7,8 @@ class Settings:
     style_save_file = 'style.css'
     jpg_composite_path = 'jpg'
     pdf_composite_path = 'pdf'
+    manga_tree_name = 'tree'
+    web_files_location = 'web'
 
     def __init__(self):
         if self.settings_exists():
@@ -23,7 +25,7 @@ class Settings:
         if not os.path.exists(self.manga_save_path):
             os.mkdir(self.manga_save_path)
 
-    def save_settings(self, composite_jpg, composite_pdf, keep_originals):
+    def save_settings(self, composite_jpg: bool, composite_pdf: bool, keep_originals: bool) -> None:
             '''
             saves the current settings
             '''
@@ -42,7 +44,7 @@ class Settings:
         with open(self.save_path, 'r') as f:
             self.settings = json.load(f)
 
-    def settings_exists(self):
+    def settings_exists(self) -> bool:
         '''
         checks if save file exists
         '''

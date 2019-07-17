@@ -2,3 +2,7 @@
 *.png
 *.jpg
 *.pdf
+
+// web files
+*.html
+*.css

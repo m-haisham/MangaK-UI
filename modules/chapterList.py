@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import *
 from requests.exceptions import InvalidSchema, InvalidURL, MissingSchema
 from modules.settings import Settings
 from modules.compostion import dir_to_pdf, stack
+from modules.tree import generate_chapter_tree
 
 class ChapterListLoader(QObject):
 
@@ -138,6 +139,8 @@ class ChapterListDownloader(QObject):
             if not self.keep_originals:
                 self.composition_label_changed.emit('Removing [{}]'.format(chapter_name))
                 shutil.rmtree(chapter_directory)
+            else:
+                generate_chapter_tree(manga_directory)
 
             self.composition_label_changed.emit('')
             
