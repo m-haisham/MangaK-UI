@@ -37,8 +37,8 @@ class ThreadedMangaDownload(object):
         self.downloader.chapter_progress_changed.connect(lambda i: self.progress['chapter_progress'].setValue(i))
         
         self.downloader.page_title_changed.connect(lambda text: self.progress['page_label'].setText(text))
-        self.downloader.page_maximum_changed.connect(lambda i: self.progress['page_progress'].setMaximum(i))
-        self.downloader.page_progress_changed.connect(lambda i: self.progress['page_progress'].setValue(i))
+        self.downloader.page_maximum_changed.connect(lambda i: self.progress['page_progress'].setMaximum(i / 1024))
+        self.downloader.page_progress_changed.connect(lambda i: self.progress['page_progress'].setValue(i / 1024))
 
         self.downloader.composition_label_changed.connect(lambda text: self.progress['composite_label'].setText(text))
 

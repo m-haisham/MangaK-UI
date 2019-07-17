@@ -657,7 +657,7 @@
                   <set>Qt::AlignCenter</set>
                  </property>
                  <property name="format">
-                  <string>%v of %m bytes | %p%</string>
+                  <string>%v of %m kb | %p%</string>
                  </property>
                 </widget>
                </item>

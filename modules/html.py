@@ -149,7 +149,6 @@ class HtmlManager(QObject):
 
             manga_data = {}
             try:
-                print(os.path.join(Settings.manga_save_path, manga_key, Settings.manga_tree_name)+'.json')
                 with open(os.path.join(Settings.manga_save_path, manga_key, Settings.manga_tree_name)+'.json') as f:
                     manga_data = json.load(f)
             except FileNotFoundError:
