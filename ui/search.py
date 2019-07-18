@@ -47,8 +47,14 @@ class ThreadedSearch(object):
         for i in range(len(self.codec.search_result)):
             manga = self.codec.search_result[i]
 
-            self.search['table'].setItem(i, 0, QTableWidgetItem(manga['name']))
-            self.search['table'].setItem(i, 1, QTableWidgetItem(manga['last_chapter']))
+            name = QTableWidgetItem(manga['name'])
+            name.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
+            
+            last_chapter = QTableWidgetItem(manga['last_chapter'])
+            last_chapter.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
+
+            self.search['table'].setItem(i, 0, name)
+            self.search['table'].setItem(i, 1, last_chapter)
 
         # enable controls
         self._set_controls(True)

@@ -46,7 +46,6 @@ def dir_to_pdf(path, save_path):
 
                 # get temporary path
                 temp = tempfile.NamedTemporaryFile().name + '.jpg'
-                print(temp)
                 # save image as temporary
                 rgb.save(temp)
 

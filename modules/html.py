@@ -152,7 +152,7 @@ class HtmlManager(QObject):
                 with open(os.path.join(Settings.manga_save_path, manga_key, Settings.manga_tree_name)+'.json') as f:
                     manga_data = json.load(f)
             except FileNotFoundError:
-                pass
+                continue
 
             all_chapters_keys = list(manga_data.keys())
 

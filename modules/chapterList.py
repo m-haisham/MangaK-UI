@@ -139,14 +139,15 @@ class ChapterListDownloader(QObject):
             if not self.keep_originals:
                 self.composition_label_changed.emit('Removing [{}]'.format(chapter_name))
                 shutil.rmtree(chapter_directory)
-            else:
-                generate_chapter_tree(manga_directory)
 
             self.composition_label_changed.emit('')
             
             self.chapter_progress_changed.emit(0)
             self.total_progress_changed.emit(i + 1)
 
+        if self.keep_originals:
+            generate_chapter_tree(manga_directory)
+            
         self.finished.emit()
 
     def save_image(self, url, directory):

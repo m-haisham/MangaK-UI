@@ -51,7 +51,9 @@ class ThreadedMangaLoad(object):
         self.loader_thread.start()
 
     def on_manga_loaded(self):
+        self.popular['proceed_button'].setEnabled(True)
         self.direct['next_button'].setEnabled(True)
+        self.top['next_button'].setEnabled(True)
         self.search['next_button'].setEnabled(True)
 
         self.download['list'].clear()

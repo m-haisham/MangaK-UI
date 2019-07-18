@@ -15,7 +15,6 @@ class ThreadedMangaDownload(object):
 
         self.progress['composite_label'].setText('')
         self.stack.setCurrentIndex(3)
-        self.download['download_button'].setEnabled(True)
 
         self.downloader.manga_name = self.download['title'].text()
         self.progress['title_label'].setText(self.download['title'].text())
@@ -55,3 +54,4 @@ class ThreadedMangaDownload(object):
         self.progress['page_progress'].setValue(self.progress['page_progress'].maximum())
 
         self.progress['composite_label'].setText('Download Task Finished!')
+        self.download['download_button'].setEnabled(True)
