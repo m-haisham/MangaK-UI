@@ -1,4 +1,5 @@
 import sys
+import datetime
 
 from PyQt5 import uic
 from PyQt5.QtCore import *
@@ -213,5 +214,5 @@ if __name__ == "__main__":
         window = Ui(app)
         app.exec_()
     except:
-        with open(Settings.log_file, 'w') as f:
+        with open(str(datetime.datetime.now()) + '.txt', 'w') as f:
             f.write(traceback.format_exc())
