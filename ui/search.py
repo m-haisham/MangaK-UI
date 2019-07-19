@@ -33,6 +33,9 @@ class ThreadedSearch(object):
         self.search_thread.start()
 
     def on_search_double_clicked(self, i):
+        if not self.search['next_button'].isEnabled():
+            return
+        
         self.search['next_button'].setEnabled(False)
         self.load_manga(self.codec.search_result[i.row()]['href'])
 

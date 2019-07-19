@@ -75,7 +75,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['composite_pdf'].triggered.connect(self.update_settings)
         self.navbar['keep_originals'].triggered.connect(self.update_settings)
         self.navbar['download_thumbnails'].triggered.connect(self.update_settings)
-        self.navbar['dark_mode'].triggered.connect(self.set_theme)
+        self.navbar['dark_mode'].triggered.connect(lambda: self.set_theme(True))
 
         self.navigation = {
             'hot': self.findChild(QPushButton, 'hotNavButton'),
@@ -181,7 +181,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         if self.settings.settings['startup_top10']:
             self.on_top10_refresh()
 
-        self.set_theme(save=False)
+        self.set_theme(False)
         self.download_resume_init()
 
         self.setEnabled(True)
@@ -199,7 +199,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             self.navbar['keep_originals'].isChecked(),
             self.navbar['download_thumbnails'].isChecked()
         )
-
+    
     def init_dark_palette(self):
         self.dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
         self.dark_palette.setColor(QPalette.WindowText, Qt.white)
@@ -215,10 +215,9 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
         self.dark_palette.setColor(QPalette.HighlightedText, Qt.black)
 
-    def set_theme(self, save = True) -> None:
+    def set_theme(self, save) -> None:
         is_dark = self.navbar['dark_mode'].isChecked()
         self.app.setPalette(self.dark_palette if is_dark else self.app.style().standardPalette())
-        
         if save:
             self.settings.dark_mode_enabled(is_dark)
 

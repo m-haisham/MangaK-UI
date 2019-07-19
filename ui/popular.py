@@ -108,6 +108,7 @@ class PopularPage(object):
 
     def on_custom_page_select(self):
         try:
+            self.popular_button_enabled(False)
             last_page = self.popular_codec.page
             page = self.popular['page_spinbox'].value()
             if self.popular_codec.max_page == '':
@@ -116,10 +117,16 @@ class PopularPage(object):
             if page <= int(self.popular_codec.max_page):
                 self.popular_codec.page = page
                 self.on_refresh()
+            else:
+                self.popular_button_enabled(True)
         except:
+            self.popular_button_enabled(True)
             traceback.print_exc()
 
     def on_popular_double_click(self, item):
+        if not self.popular['proceed_button'].isEnabled():
+            return
+
         self.popular['proceed_button'].setEnabled(False)
         widget = self.popular['table'].itemWidget(item)
         self.load_manga(widget.url)
