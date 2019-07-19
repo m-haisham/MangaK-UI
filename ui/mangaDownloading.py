@@ -12,14 +12,16 @@ from modules.settings import Settings
 class ThreadedMangaDownload(object):
     def __init__(self):
         super().__init__()
+        self.path = None
 
         self.downloader = ChapterListDownloader()
         self.downloader_thread = QThread()
         self.init_downloader_thread()
     
     def start_download_task(self, manga_title: str, chapter_list : list):
-
+        self.path = os.path.realpath(os.path.join(Settings.manga_save_path, manga_title))
         self.progress['composite_label'].setText('')
+        self.progress['open_button'].hide()
         self.stack.setCurrentIndex(3)
 
         self.downloader.manga_name = manga_title
@@ -61,6 +63,7 @@ class ThreadedMangaDownload(object):
 
         self.progress['composite_label'].setText('Download Task Finished!')
         self.download['download_button'].setEnabled(True)
+        self.progress['open_button'].show()
 
     def download_resume_init(self):
         if not os.path.exists(os.path.join(Settings.manga_save_path, Settings.download_log)):
@@ -88,3 +91,6 @@ class ThreadedMangaDownload(object):
         else:
             os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
             return
+
+    def on_progress_open_clicked(self):
+        os.startfile(self.path)

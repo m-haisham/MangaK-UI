@@ -105,6 +105,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
         self.popular['progress'].hide()
 
+        self.popular['table'].itemDoubleClicked.connect(self.on_popular_double_click)
+
         self.popular['refresh_button'].clicked.connect(self.on_refresh)
         self.popular['previous_button'].clicked.connect(self.on_previous_page)
         self.popular['page_button'].clicked.connect(self.on_custom_page_select)
@@ -116,7 +118,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'refresh': self.findChild(QPushButton, 'refreshTopButton'),
             'next_button': self.findChild(QPushButton, 'nextTopButton')
         }
-
+        self.top['list'].itemDoubleClicked.connect(self.on_top10_double_clicked)
         self.top['refresh'].clicked.connect(self.on_top10_refresh)
         self.top['next_button'].clicked.connect(self.on_top10_next)
 
@@ -128,7 +130,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'next_button': self.findChild(QPushButton, 'searchNextButton')
         }
 
-
+        self.search['table'].doubleClicked.connect(self.on_search_double_clicked)
         self.search['progress_bar'].hide()
         self.search['search_button'].clicked.connect(self._search)
         self.search['next_button'].clicked.connect(self._search_to_manga_download)
@@ -167,8 +169,13 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'page_label': self.findChild(QLabel, 'pageDownloadProgressLabel'),
             'page_progress': self.findChild(QProgressBar, 'pageDownloadProgressBar'),
 
-            'composite_label': self.findChild(QLabel, 'compositingLabel')
+            'composite_label': self.findChild(QLabel, 'compositingLabel'),
+            'open_button': self.findChild(QPushButton, 'progressOpenDirectoryButton')
         }
+
+        self.progress['open_button'].hide()
+        self.progress['open_button'].clicked.connect(self.on_progress_open_clicked)
+
         if self.settings.settings['startup_popular']:
             self.on_refresh()
         if self.settings.settings['startup_top10']:

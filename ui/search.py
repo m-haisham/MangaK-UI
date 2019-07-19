@@ -19,7 +19,6 @@ class ThreadedSearch(object):
 
         self.codec.moveToThread(self.search_thread)
 
-        self.codec.finished.connect(self.search_thread.quit)
         self.codec.finished.connect(self._on_search_finished)
 
         self.search_thread.started.connect(self.codec.search)
@@ -33,6 +32,10 @@ class ThreadedSearch(object):
 
         self.search_thread.start()
 
+    def on_search_double_clicked(self, i):
+        self.search['next_button'].setEnabled(False)
+        self.load_manga(self.codec.search_result[i.row()]['href'])
+
     def _on_search_progress(self, i):
         self.search['progress_bar'].setValue(i)
 
@@ -41,6 +44,8 @@ class ThreadedSearch(object):
         self.search['progress_bar'].show()
 
     def _on_search_finished(self):
+
+        self.search_thread.quit()
 
         # fill table
         self.search['table'].setRowCount(len(self.codec.search_result))
@@ -69,3 +74,4 @@ class ThreadedSearch(object):
         self.search['input'].setEnabled(is_active)
         self.search['search_button'].setEnabled(is_active)
         self.search['next_button'].setEnabled(is_active)
+    

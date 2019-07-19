@@ -49,3 +49,8 @@ class Top10List(object):
 
         widget = self.top['list'].itemWidget(selected_items[0])
         self.load_manga(widget.url)
+
+    def on_top10_double_clicked(self, item):
+        self.top['next_button'].setEnabled(False)
+        widget = self.top['list'].itemWidget(item)
+        self.load_manga(widget.url)

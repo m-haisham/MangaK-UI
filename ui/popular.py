@@ -118,3 +118,8 @@ class PopularPage(object):
                 self.on_refresh()
         except:
             traceback.print_exc()
+
+    def on_popular_double_click(self, item):
+        self.popular['proceed_button'].setEnabled(False)
+        widget = self.popular['table'].itemWidget(item)
+        self.load_manga(widget.url)
