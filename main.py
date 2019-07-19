@@ -208,7 +208,6 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         if save:
             self.settings.dark_mode_enabled(is_dark)
 
-
 if __name__ == "__main__":
     try:
         app = QApplication(sys.argv)

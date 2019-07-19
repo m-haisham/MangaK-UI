@@ -68,6 +68,7 @@ class ThreadedMangaDownload(object):
 
         resume_query = QMessageBox.question(self, 'Resume download?', 'Previous download was not completed. would you like to resume?')
         if resume_query == QMessageBox.No:
+            os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
             return
 
         chapter_list = None

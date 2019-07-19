@@ -95,6 +95,7 @@ class ChapterListDownloader(QObject):
         if not os.path.exists(manga_directory):
             os.mkdir(manga_directory)
 
+        chapter_amount = len(self.chapter_list)
         # Loop through all chapters in chapter list
         for i in range(len(self.chapter_list)):
             chapter_href = self.chapter_list[i]['href']
@@ -112,6 +113,7 @@ class ChapterListDownloader(QObject):
             self.chapter_progress_changed.emit(0)
             self.chapter_maximum_changed.emit(len(page_list))
 
+            # download all pages
             for j in range(len(page_list)):
                 page = page_list[j]
                 self.save_image(page, chapter_directory)
@@ -146,12 +148,16 @@ class ChapterListDownloader(QObject):
 
             self.chapter_progress_changed.emit(0)
             self.total_progress_changed.emit(i + 1)
-            self.create_dlog(self.chapter_list[i+1])
+
+            # update download log
+            if i+1 == chapter_amount:
+                os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
+            else:
+                self.create_dlog(self.chapter_list[i+1])
 
         if self.keep_originals:
             generate_chapter_tree(manga_directory)
         
-        os.rmdir(os.path.join(Settings.manga_save_path, Settings.download_log))
         self.finished.emit()
 
     def save_image(self, url, directory):
