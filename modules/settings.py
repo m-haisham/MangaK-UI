@@ -22,6 +22,7 @@ class Settings:
                 'composite_jpg': False,
                 'composite_pdf': False,
                 'keep_originals': True,
+                'download_thumbnails': True,
                 'dark_mode': False
             }
             with open(self.save_path, 'w') as f:
@@ -30,7 +31,7 @@ class Settings:
         if not os.path.exists(self.manga_save_path):
             os.mkdir(self.manga_save_path)
 
-    def save_settings(self, startup_popular: bool, startup_top10: bool, composite_jpg: bool, composite_pdf: bool, keep_originals: bool) -> None:
+    def save_settings(self, startup_popular: bool, startup_top10: bool, composite_jpg: bool, composite_pdf: bool, keep_originals: bool, download_thumbnails: bool) -> None:
         '''
         saves the current settings
         '''
@@ -40,6 +41,7 @@ class Settings:
             'composite_jpg': composite_jpg,
             'composite_pdf': composite_pdf,
             'keep_originals': keep_originals,
+            'download_thumbnails': download_thumbnails,
             'dark_mode': self.settings['dark_mode']
         }
         with open(self.save_path, 'w') as f:
@@ -47,9 +49,12 @@ class Settings:
 
     def dark_mode_enabled(self, dark_mode : bool) -> None:
         self.settings = {
+            'startup_popular': self.settings['startup_popular'],
+            'startup_top10': self.settings['startup_top10'],
             'composite_jpg': self.settings['composite_jpg'],
             'composite_pdf': self.settings['composite_pdf'],
             'keep_originals': self.settings['keep_originals'],
+            'download_thumbnails': self.settings['download_thumbnails'],
             'dark_mode': dark_mode
         }
         with open(self.save_path, 'w') as f:

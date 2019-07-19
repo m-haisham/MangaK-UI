@@ -17,13 +17,13 @@ class ThreadedMangaDownload(object):
         self.downloader_thread = QThread()
         self.init_downloader_thread()
     
-    def start_download_task(self, chapter_list : list):
+    def start_download_task(self, manga_title: str, chapter_list : list):
 
         self.progress['composite_label'].setText('')
         self.stack.setCurrentIndex(3)
 
-        self.downloader.manga_name = self.download['title'].text()
-        self.progress['title_label'].setText(self.download['title'].text())
+        self.downloader.manga_name = manga_title
+        self.progress['title_label'].setText(manga_title)
 
         self.downloader.chapter_list = chapter_list
         self.downloader.compile_jpg = self.settings.settings['composite_jpg']
@@ -66,21 +66,25 @@ class ThreadedMangaDownload(object):
         if not os.path.exists(os.path.join(Settings.manga_save_path, Settings.download_log)):
             return
 
-        resume_query = QMessageBox.question(self, 'Resume download?', 'Previous download was not completed. would you like to resume?')
-        if resume_query == QMessageBox.No:
-            os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
-            return
-
+        manga_title = None
         chapter_list = None
         with open(os.path.join(Settings.manga_save_path, Settings.download_log)) as dlog:
-            chapter_list = json.load(dlog)
-        
+            data = json.load(dlog)
+            manga_title = data['name']
+            chapter_list = data['list']
+
         final_list = []
         if type(chapter_list) == dict:
             final_list.append(chapter_list)
         elif type(chapter_list) == list:
             final_list = chapter_list
         else:
+            os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
             return
 
-        self.start_download_task(final_list)
+        resume_query = QMessageBox.question(self, manga_title, 'Download of {0} {1} was not completed.\nWould you like to resume?'.format(len(final_list), 'chapter' if len(final_list) == 1 else 'chapters'))
+        if resume_query == QMessageBox.Yes:
+            self.start_download_task(manga_title, final_list)
+        else:
+            os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
+            return

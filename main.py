@@ -29,6 +29,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         # uic.loadUi('dialogs/main.ui', self)
 
         Ui_MainWindow().setupUi(self)
+        self.show()
+        self.setEnabled(False)
 
         self.app = app
 
@@ -48,6 +50,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'startup_popular': self.findChild(QAction, 'actionLoadPopular'),
             'startup_top10': self.findChild(QAction, 'actionLoadTop10'),
             'composite_pdf': self.findChild(QAction, 'actionCompositePdf'),
+            'download_thumbnails': self.findChild(QAction, 'actionThumbnails'),
             'dark_mode': self.findChild(QAction, 'actionDarkMode'),
             'documentation': self.findChild(QAction, 'actionDocumentation'),
             'about': self.findChild(QAction, 'actionAbout'),
@@ -63,6 +66,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['composite_jpg'].setChecked(self.settings.settings['composite_jpg'])
         self.navbar['composite_pdf'].setChecked(self.settings.settings['composite_pdf'])
         self.navbar['keep_originals'].setChecked(self.settings.settings['keep_originals'])
+        self.navbar['download_thumbnails'].setChecked(self.settings.settings['download_thumbnails'])
         self.navbar['dark_mode'].setChecked(self.settings.settings['dark_mode'])
 
         self.navbar['startup_popular'].triggered.connect(self.update_settings)
@@ -70,6 +74,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['composite_jpg'].triggered.connect(self.update_settings)
         self.navbar['composite_pdf'].triggered.connect(self.update_settings)
         self.navbar['keep_originals'].triggered.connect(self.update_settings)
+        self.navbar['download_thumbnails'].triggered.connect(self.update_settings)
         self.navbar['dark_mode'].triggered.connect(self.set_theme)
 
         self.navigation = {
@@ -171,7 +176,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
         self.set_theme(save=False)
         self.download_resume_init()
-        self.show()
+
+        self.setEnabled(True)
 
     def on_direct_download(self):
         self.direct['input'].setEnabled(False)
@@ -183,7 +189,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             self.navbar['startup_top10'].isChecked(),
             self.navbar['composite_jpg'].isChecked(),
             self.navbar['composite_pdf'].isChecked(),
-            self.navbar['keep_originals'].isChecked()
+            self.navbar['keep_originals'].isChecked(),
+            self.navbar['download_thumbnails'].isChecked()
         )
 
     def init_dark_palette(self):

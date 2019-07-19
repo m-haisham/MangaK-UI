@@ -92,6 +92,8 @@ class PopularPageCodec(QObject):
     def __init__(self):
         super().__init__()
 
+        self.thumbnails = True
+
         self.page = 1
         self.url = 'https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page='
         self.max_page = ''
@@ -114,7 +116,7 @@ class PopularPageCodec(QObject):
         for card in cards:
             
             data = {
-                'image_bytes': requests.get(card.find_all('a')[0].find('img')['src']).content,
+                'image_bytes': requests.get(card.find_all('a')[0].find('img')['src']).content if self.thumbnails else None,
                 'url': card.find_all('a')[0]['href'],
                 'manga_title': card.find('h3').text.strip('\n'),
                 'last_chapter': card.find('a', {'class': 'list-story-item-wrap-chapter'}).text.strip('\n'),

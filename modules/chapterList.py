@@ -86,7 +86,7 @@ class ChapterListDownloader(QObject):
 
     def download(self):
 
-        self.create_dlog(self.chapter_list)
+        self.create_dlog(self.manga_name, self.chapter_list)
         self.total_maximum_changed.emit(len(self.chapter_list))
         self.total_progress_changed.emit(0)
 
@@ -121,23 +121,23 @@ class ChapterListDownloader(QObject):
 
             # Do compositions here
             if self.compile_jpg:
+                # jpg
                 self.composition_label_changed.emit('Compositing [{}] to JPG'.format(chapter_name))
 
                 jpg_dir = os.path.join(Settings.manga_save_path, self.manga_name, Settings.jpg_composite_path)
                 if not os.path.exists(jpg_dir):
                     os.mkdir(jpg_dir)
                 
-                # jpg
                 stack(chapter_directory, jpg_dir)
 
             if self.compile_pdf:
+                # pdf
                 self.composition_label_changed.emit('Compositing [{}] to PDF'.format(chapter_name))
 
                 pdf_dir = os.path.join(Settings.manga_save_path, self.manga_name, Settings.pdf_composite_path)
                 if not os.path.exists(pdf_dir):
                     os.mkdir(pdf_dir)
                 
-                # pdf
                 dir_to_pdf(chapter_directory, pdf_dir)
 
             if not self.keep_originals:
@@ -153,14 +153,14 @@ class ChapterListDownloader(QObject):
             if i+1 == chapter_amount:
                 os.remove(os.path.join(Settings.manga_save_path, Settings.download_log))
             else:
-                self.create_dlog(self.chapter_list[i+1])
+                self.create_dlog(self.manga_name, self.chapter_list[i+1:])
 
         if self.keep_originals:
             generate_chapter_tree(manga_directory)
         
         self.finished.emit()
 
-    def save_image(self, url, directory):
+    def save_image(self, url: str, directory: str) -> None:
         """
         url (String): online image file path
         directory (String): Image file save path
@@ -205,6 +205,9 @@ class ChapterListDownloader(QObject):
             pages.append(row['src'])
         return pages
 
-    def create_dlog(self, chapter_list: list):
+    def create_dlog(self, manga_name: str, chapter_list: list) -> None:
         with open(os.path.join(Settings.manga_save_path, Settings.download_log), 'w') as dlog:
-            json.dump(chapter_list, dlog)
+            json.dump({
+                'name': manga_name,
+                'list': chapter_list
+            }, dlog)

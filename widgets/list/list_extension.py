@@ -22,6 +22,9 @@ class PopularListItem(QWidget):
         self.descriptionLabel = self.findChild(QLabel, 'descriptionLabel')
 
     def setThumbnail(self, raw_data : bytes) -> None:
+        if raw_data == None:
+            return
+
         image = QImage()
         image.loadFromData(raw_data)
 

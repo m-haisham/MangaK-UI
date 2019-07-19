@@ -45,6 +45,8 @@ class PopularPage(object):
     def on_refresh(self):
         self.popular_button_enabled(False)
         self.popular['table'].clear()
+
+        self.popular_codec.thumbnails = self.settings.settings['download_thumbnails']
         self.popular_thread.start()
 
     def on_refresh_done(self):
@@ -110,6 +112,7 @@ class PopularPage(object):
             page = self.popular['page_spinbox'].value()
             if self.popular_codec.max_page == '':
                 self.popular_codec.get_max_page()
+                self._set_page()
             if page <= int(self.popular_codec.max_page):
                 self.popular_codec.page = page
                 self.on_refresh()

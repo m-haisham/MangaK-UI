@@ -11,7 +11,7 @@ class ThreadedMangaLoad(object):
         self.loader = ChapterListLoader()
         self.loader_thread = QThread()
         self.init_loader_thread()
-    
+
     def init_loader_thread(self):
         self.loader.title.connect(self.set_title)
         self.loader.maximum.connect(self.set_manga_maximum)
@@ -49,6 +49,7 @@ class ThreadedMangaLoad(object):
         
         self.loader.manga_link = manga_link
         self.loader_thread.start()
+        QListWidget.item
 
     def on_manga_loaded(self):
         self.popular['proceed_button'].setEnabled(True)
@@ -104,4 +105,5 @@ class ThreadedMangaLoad(object):
             self.download['download_button'].setEnabled(True)
             return
 
-        self.start_download_task(checked_chapters)
+        self.start_download_task(self.download['title'].text(), checked_chapters)
+    

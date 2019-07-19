@@ -950,6 +950,9 @@
      <addaction name="actionCompositePdf"/>
     </widget>
     <widget class="QMenu" name="menuStartup">
+     <property name="toolTip">
+      <string>Runs the selected Functions on startup</string>
+     </property>
      <property name="title">
       <string>Startup</string>
      </property>
@@ -960,6 +963,8 @@
     <addaction name="separator"/>
     <addaction name="menuComposition"/>
     <addaction name="actionKeep_originals"/>
+    <addaction name="separator"/>
+    <addaction name="actionThumbnails"/>
     <addaction name="separator"/>
     <addaction name="actionDarkMode"/>
    </widget>
@@ -1070,6 +1075,17 @@
    </property>
    <property name="text">
     <string>Load top10</string>
+   </property>
+  </action>
+  <action name="actionThumbnails">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Thumbnails</string>
+   </property>
+   <property name="toolTip">
+    <string>Not loading thumbnails makes the loading process faster in general</string>
    </property>
   </action>
  </widget>
