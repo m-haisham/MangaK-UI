@@ -9,7 +9,7 @@ class Settings:
     pdf_composite_path = 'pdf'
     manga_tree_name = 'tree'
     web_files_location = 'web'
-    log_file = 'log.txt'
+    download_log = 'dlog.json'
     mangakakalot_home = 'https://mangakakalot.com/page'
 
     def __init__(self):

@@ -1,4 +1,5 @@
 import sys
+import re
 import datetime
 
 from PyQt5 import uic
@@ -169,6 +170,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             self.on_top10_refresh()
 
         self.set_theme(save=False)
+        self.download_resume_init()
         self.show()
 
     def on_direct_download(self):
@@ -214,5 +216,5 @@ if __name__ == "__main__":
         window = Ui(app)
         app.exec_()
     except:
-        with open(str(datetime.datetime.now()) + '.txt', 'w') as f:
+        with open(re.sub(r':', '-', str(datetime.datetime.now())) + '.txt', 'w') as f:
             f.write(traceback.format_exc())

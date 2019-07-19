@@ -1,6 +1,7 @@
 import os
 import shutil
 import sys
+import json
 
 import requests
 from bs4 import BeautifulSoup
@@ -85,6 +86,7 @@ class ChapterListDownloader(QObject):
 
     def download(self):
 
+        self.create_dlog(self.chapter_list)
         self.total_maximum_changed.emit(len(self.chapter_list))
         self.total_progress_changed.emit(0)
 
@@ -141,13 +143,15 @@ class ChapterListDownloader(QObject):
                 shutil.rmtree(chapter_directory)
 
             self.composition_label_changed.emit('')
-            
+
             self.chapter_progress_changed.emit(0)
             self.total_progress_changed.emit(i + 1)
+            self.create_dlog(self.chapter_list[i+1])
 
         if self.keep_originals:
             generate_chapter_tree(manga_directory)
-            
+        
+        os.rmdir(os.path.join(Settings.manga_save_path, Settings.download_log))
         self.finished.emit()
 
     def save_image(self, url, directory):
@@ -194,3 +198,7 @@ class ChapterListDownloader(QObject):
         for row in rows:
             pages.append(row['src'])
         return pages
+
+    def create_dlog(self, chapter_list: list):
+        with open(os.path.join(Settings.manga_save_path, Settings.download_log), 'w') as dlog:
+            json.dump(chapter_list, dlog)

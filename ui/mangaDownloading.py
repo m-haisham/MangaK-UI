@@ -1,7 +1,13 @@
+
+import os
+import json
+
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 
 from modules.chapterList import ChapterListDownloader
+from modules.settings import Settings
 
 class ThreadedMangaDownload(object):
     def __init__(self):
@@ -55,3 +61,25 @@ class ThreadedMangaDownload(object):
 
         self.progress['composite_label'].setText('Download Task Finished!')
         self.download['download_button'].setEnabled(True)
+
+    def download_resume_init(self):
+        if not os.path.exists(os.path.join(Settings.manga_save_path, Settings.download_log)):
+            return
+
+        resume_query = QMessageBox.question(self, 'Resume download?', 'Previous download was not completed. would you like to resume?')
+        if resume_query == QMessageBox.No:
+            return
+
+        chapter_list = None
+        with open(os.path.join(Settings.manga_save_path, Settings.download_log)) as dlog:
+            chapter_list = json.load(dlog)
+        
+        final_list = []
+        if type(chapter_list) == dict:
+            final_list.append(chapter_list)
+        elif type(chapter_list) == list:
+            final_list = chapter_list
+        else:
+            return
+
+        self.start_download_task(final_list)
