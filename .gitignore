@@ -8,4 +8,5 @@
 *.css
 
 // other
+*.txt
 *.json
