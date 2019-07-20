@@ -151,7 +151,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'progress_bar': self.findChild(QProgressBar, 'mangaDataLoadProgressBar'),
             'download_button': self.findChild(QPushButton, 'selectedMangaDownloadButton')
         }
-
+        
+        self.download['list'].doubleClicked.connect(self.on_download_double_clicked)
         self.download['progress_bar'].hide()
         self.download['select_all'].clicked.connect(self.select_all)
         self.download['inverse'].clicked.connect(self.inverse_all)

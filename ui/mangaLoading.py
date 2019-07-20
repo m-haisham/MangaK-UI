@@ -7,6 +7,8 @@ from modules.chapterList import ChapterListLoader
 class ThreadedMangaLoad(object):
     def __init__(self):
         super().__init__()
+        self.previous_check = None
+        self.last_double = None
 
         self.loader = ChapterListLoader()
         self.loader_thread = QThread()
@@ -86,10 +88,13 @@ class ThreadedMangaLoad(object):
 
         for i in range(items):
             item = self.download['list'].item(i)
-            if item.checkState() == Qt.Checked:
-                item.setCheckState(Qt.Unchecked)
-            elif item.checkState() == Qt.Unchecked:
-                item.setCheckState(Qt.Checked)
+            self.inverse_selection(item)
+
+    def inverse_selection(self, item: QListWidgetItem):
+        if item.checkState() == Qt.Checked:
+            item.setCheckState(Qt.Unchecked)
+        elif item.checkState() == Qt.Unchecked:
+            item.setCheckState(Qt.Checked)
 
     def on_download_clicked(self):
         self.download['download_button'].setEnabled(False)
@@ -98,7 +103,7 @@ class ThreadedMangaLoad(object):
         checked_chapters = []
         for i in range(item_count):
             item = self.download['list'].item(i)
-            if item.checkState() == Qt.Checked:
+            if item.checkState() == Qt.Checked or item.checkState() == Qt.PartiallyChecked:
                 checked_chapters.append(self.loader.loaded_list[i])
         
         if len(checked_chapters) <= 0:
@@ -106,4 +111,25 @@ class ThreadedMangaLoad(object):
             return
 
         self.start_download_task(self.download['title'].text(), checked_chapters)
-    
+
+    def on_download_double_clicked(self, i: QModelIndex) -> None:
+        if self.last_double == None:
+            self.last_double = i.row()
+            self.previous_check = self.download['list'].item(self.last_double).checkState()
+            self.download['list'].item(self.last_double).setCheckState(Qt.PartiallyChecked)
+        else:
+            current = i.row()
+            if self.last_double == current:
+                self.download['list'].item(self.last_double).setCheckState(self.previous_check)
+                self.last_double = None
+                return
+            elif self.last_double > current:
+                self.download['list'].item(self.last_double).setCheckState(self.previous_check)
+                current, self.last_double = self.last_double, current
+                
+            self.download['list'].item(self.last_double).setCheckState(self.previous_check)
+            for i in range(self.last_double, current+1):
+                item = self.download['list'].item(i)
+                self.inverse_selection(item)
+
+            self.last_double = None
