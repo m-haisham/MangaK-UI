@@ -3,5 +3,5 @@ yattag==1.11.2
 requests==2.22.0
 img2pdf==0.3.3
 Pillow==6.1.0
-PyQt5==5.13.0
+PyQt5==5.12.2
 beautifulsoup4==4.7.1
