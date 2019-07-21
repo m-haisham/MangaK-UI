@@ -102,7 +102,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>5</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -401,6 +401,9 @@
                  </property>
                  <property name="text">
                   <string>Manga Dowload</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>

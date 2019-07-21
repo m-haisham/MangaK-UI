@@ -1,6 +1,7 @@
 
 import os
 import json
+import re
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -19,6 +20,7 @@ class ThreadedMangaDownload(object):
         self.init_downloader_thread()
     
     def start_download_task(self, manga_title: str, chapter_list : list):
+        manga_title = re.sub(r'[/\\:*"<>|\?]', '', manga_title)
         self.path = os.path.realpath(os.path.join(Settings.manga_save_path, manga_title))
         self.progress['composite_label'].setText('')
         self.progress['open_button'].hide()

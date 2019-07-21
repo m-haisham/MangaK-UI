@@ -1,27 +1,26 @@
-import sys
-import re
 import datetime
+import re
+import sys
+import traceback
 
 from PyQt5 import uic
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-import traceback
+from PyQt5.QtWidgets import *
 
+from dialogs.main_window import Ui_MainWindow
 from modules.chapterList import ChapterListDownloader, ChapterListLoader
 from modules.codec import MKCodec
+from modules.html import HtmlManager
 from modules.settings import Settings
 from ui.mangaDownloading import ThreadedMangaDownload
 from ui.mangaLoading import ThreadedMangaLoad
+from ui.popular import PopularPage
 from ui.search import ThreadedSearch
+from ui.top10 import Top10List
 from ui.tree_gen import ThreadedTreeGenerate
 from ui.web import ThreadedWebGenerate
-from ui.popular import PopularPage
-from ui.top10 import Top10List
 
-from dialogs.main_window import Ui_MainWindow
-
-from modules.html import HtmlManager
 
 class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate, ThreadedWebGenerate, PopularPage, Top10List):
     def __init__(self, app : QApplication):

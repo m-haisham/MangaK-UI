@@ -181,6 +181,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.mangaTitle.setFont(font)
+        self.mangaTitle.setWordWrap(True)
         self.mangaTitle.setObjectName("mangaTitle")
         self.verticalLayout_3.addWidget(self.mangaTitle, 0, QtCore.Qt.AlignHCenter)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
