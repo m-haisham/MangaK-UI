@@ -11,6 +11,7 @@ class Settings:
     web_files_location = 'web'
     download_log = 'dlog.json'
     mangakakalot_home = 'https://mangakakalot.com/page'
+    web_keybinding = 'keybinding.js'
 
     def __init__(self):
         if self.settings_exists():

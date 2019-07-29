@@ -2,10 +2,17 @@ import os
 import tempfile
 import traceback
 import img2pdf
+import logging
 
 import re
 import numpy as np
 from PIL import Image
+
+LOG_FORMAT = '[%(levelname)s] [%(asctime)s] %(message)s'
+logging.basicConfig(filename='Composition.log',
+                    level=logging.ERROR,
+                    format=LOG_FORMAT)
+logger = logging.getLogger()
 
 numbers = re.compile(r'(\d+)')
 
@@ -33,6 +40,12 @@ def dir_to_pdf(path, save_path):
 
             file_path = os.path.join(path, directory)
 
+            # if image has transparency
+            if 'transparency' in new_img.info:
+
+                # convert to RGBA mode
+                new_img.convert('RGBA')
+
             # if image mode is RGBA
             if(new_img.mode == 'RGBA'):
                 # convert image to RGB
@@ -46,8 +59,9 @@ def dir_to_pdf(path, save_path):
 
                 # get temporary path
                 temp = tempfile.NamedTemporaryFile().name + '.jpg'
+
                 # save image as temporary
-                rgb.save(temp)
+                rgb.save(temp, 'JPEG')
 
                 # overrite file_path
                 file_path = temp
@@ -58,9 +72,13 @@ def dir_to_pdf(path, save_path):
     if len(file_path_list) == 0:
         return
 
-    # save as pdf using img2pdf
-    with open(os.path.join(save_path, os.path.basename(os.path.normpath(path)) + '.pdf'), 'wb') as f:
-        f.write(img2pdf.convert(file_path_list, dpi=300.0))
+    try:
+        # save as pdf using img2pdf
+        with open(os.path.join(save_path, os.path.basename(os.path.normpath(path)) + '.pdf'), 'wb') as f:
+            f.write(img2pdf.convert(file_path_list))
+    except Exception as e:
+        logger.error('[%s] [%s] %s' % (type(e).__name__.upper(), ' '.join(os.path.basename(os.path.normpath(path).split('_')).upper(), e)))
+
 
 def stack(folder_path, save_path, end='.jpg', new_width=None):
     '''

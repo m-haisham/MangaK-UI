@@ -2,6 +2,7 @@ import datetime
 import re
 import sys
 import traceback
+import logging
 
 from PyQt5 import uic
 from PyQt5.QtCore import *
@@ -227,6 +228,6 @@ if __name__ == "__main__":
         app.setStyle("Fusion")
         window = Ui(app)
         app.exec_()
-    except:
-        with open(re.sub(r':', '-', str(datetime.datetime.now())) + '.txt', 'w') as f:
-            f.write(traceback.format_exc())
+    except Exception as e:
+        traceback.print_exc()
+        logging.exception(e)

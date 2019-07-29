@@ -22,12 +22,22 @@ class HtmlManager(QObject):
         '''
         super().__init__()
 
-        if not os.path.exists(Settings.style_save_file):
+        if not os.path.exists(Settings.web_files_location):
+            os.mkdir(Settings.web_files_location)
+        
+        if not os.path.exists(os.path.join(Settings.web_files_location, Settings.style_save_file)):
             from modules.styles import style
 
-            with open(Settings.style_save_file , 'w') as f:
+            with open(os.path.join(Settings.web_files_location, Settings.style_save_file) , 'w') as f:
                 for line in style:
                     f.write(line)
+
+        if not os.path.exists(os.path.join(Settings.web_files_location, Settings.web_keybinding)):
+            from modules.keybinding import keybinding
+
+            with open(os.path.join(Settings.web_files_location, Settings.web_keybinding) , 'w') as f:
+                for line in keybinding:
+                    f.write(line+'\n')
 
         self.main_menu = os.path.join(Settings.web_files_location, 'index.html')
 
@@ -51,14 +61,14 @@ class HtmlManager(QObject):
         doc.asis('<html lang="en" dir="ltr">')
         with tag('head'):
             doc.asis('<meta charset="utf-8">')
-            doc.asis('<link rel="stylesheet" href="../../style.css">')
+            doc.asis('<link rel="stylesheet" href="../style.css">')
             with tag('title'):
                 text(manga_title + ' - ' + chapter_title)
         with tag('body'):
             with tag('div', klass='container'):
                 # manga title
                 with tag('div', klass='title-container'):
-                    doc.asis('<a class="title manga-title" href="' + os.path.join('..', manga_title + '.html') + '" >' + manga_title + '</a>')
+                    doc.asis('<a class="title manga-title uq-back" href="' + os.path.join('..', manga_title + '.html') + '" >' + manga_title + '</a>')
                 with tag('div', klass='chapter-bar'):
                     doc.asis('<a class="btn btn-left btn-1 btn-1d" href="' + previous + '">Previous</a>')
                     with tag('h3', klass='title chapter-title'):
@@ -75,6 +85,8 @@ class HtmlManager(QObject):
                     with tag('h3', klass='title chapter-title'):
                         text(chapter_title)
                     doc.asis('<a class="btn btn-right btn-1 btn-1d" href="' + next + '">Next</a>')
+                
+                doc.asis('<script src="../'+Settings.web_keybinding+'"></script>')
         doc.asis('</html>')
 
         # save html doc in (destination)
@@ -99,7 +111,7 @@ class HtmlManager(QObject):
         doc.asis('<html lang="en" dir="ltr">')
         with tag('head'):
             doc.asis('<meta charset="utf-8">')
-            doc.asis('<link rel="stylesheet" href="../style.css">')
+            doc.asis('<link rel="stylesheet" href="style.css">')
             with tag('title'):
                 text(title if is_manga_list else title + '- Chapter list')
         with tag('body'):
@@ -138,8 +150,7 @@ class HtmlManager(QObject):
         '''
         # generate manga list
         all_manga_keys = get_dirs(Settings.manga_save_path)[0]
-        if not os.path.exists(Settings.web_files_location):
-            os.mkdir(Settings.web_files_location)
+        
 
         self.generate_list('Manga list', all_manga_keys, self.main_menu)
 
