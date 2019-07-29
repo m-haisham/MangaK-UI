@@ -23,6 +23,7 @@ from ui.tree_gen import ThreadedTreeGenerate
 from ui.web import ThreadedWebGenerate
 
 
+
 class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate, ThreadedWebGenerate, PopularPage, Top10List):
     def __init__(self, app : QApplication):
         super(Ui, self).__init__()

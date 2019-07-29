@@ -1,27 +1,27 @@
-keybinding = []
-keybinding.append('left = document.getElementsByClassName("btn-left")[0];')
-keybinding.append('right = document.getElementsByClassName("btn-right")[0];')
-keybinding.append('back = document.getElementsByClassName("uq-back")[0];')
-keybinding.append('')
-keybinding.append('')
-keybinding.append('document.addEventListener("keydown", function(e) {')
-keybinding.append('  switch (e.which) {')
-keybinding.append('    case 37: // left')
-keybinding.append('      e.preventDefault();')
-keybinding.append('      left.click();')
-keybinding.append('      break;')
-keybinding.append('    case 38: // up')
-keybinding.append('      break;')
-keybinding.append('    case 39: // right')
-keybinding.append('      e.preventDefault();')
-keybinding.append('      right.click();')
-keybinding.append('      break;')
-keybinding.append('    case 40: // down')
-keybinding.append('      break;')
-keybinding.append('    case 76: // l')
-keybinding.append('      back.click();')
-keybinding.append('      break;')
-keybinding.append('    default:')
-keybinding.append('      return;')
-keybinding.append('  }')
-keybinding.append('});')
+keybinding = '''
+left = document.getElementsByClassName("btn-left")[0];
+right = document.getElementsByClassName("btn-right")[0];
+back = document.getElementsByClassName("uq-back")[0];
+
+
+document.addEventListener("keydown", function(e) {
+  switch (e.which) {
+    case 37: // left
+      e.preventDefault();
+      left.click();
+      break;
+    case 38: // up
+      break;
+    case 39: // right
+      e.preventDefault();
+      right.click();
+      break;
+    case 40: // down
+      break;
+    case 76: // l
+      back.click();
+      break;
+    default:
+      return;
+  }
+});'''

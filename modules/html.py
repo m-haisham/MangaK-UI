@@ -29,15 +29,13 @@ class HtmlManager(QObject):
             from modules.styles import style
 
             with open(os.path.join(Settings.web_files_location, Settings.style_save_file) , 'w') as f:
-                for line in style:
-                    f.write(line)
+                f.write(style)
 
         if not os.path.exists(os.path.join(Settings.web_files_location, Settings.web_keybinding)):
             from modules.keybinding import keybinding
 
             with open(os.path.join(Settings.web_files_location, Settings.web_keybinding) , 'w') as f:
-                for line in keybinding:
-                    f.write(line+'\n')
+                f.write(keybinding)
 
         self.main_menu = os.path.join(Settings.web_files_location, 'index.html')
 

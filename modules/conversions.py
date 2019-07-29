@@ -5,14 +5,15 @@ def create_py_list(path, destination, plist = 'style'):
 
     reads all lines from a file and makes a python file which has all of them in a list called style
     '''
-    declaration = plist+' = []\n'
-    lines = [line.rstrip() for line in open(path)]
+    declaration = plist+" = '''\n"
+    lines = [line for line in open(path)]
 
     with open(destination, 'w') as f:
         f.write(declaration)
         for line in lines:
-            f.write('''%s.append('%s')\n''' % (plist, line))
-
+            f.write(line)
+        f.write("'''")
+    
 def list_to_file(_list, destination):
     '''
     _list (list): list with strings
@@ -26,3 +27,4 @@ def list_to_file(_list, destination):
 
 if __name__ == "__main__":
     create_py_list('modules/keybinding.js', 'modules/keybinding.py', 'keybinding')
+    create_py_list('modules/style.css', 'modules/styles.py', 'style')

@@ -1,159 +1,161 @@
-style = []
-style.append(":root {")
-style.append("  --main-fore-color: #039be5;")
-style.append("  --main-bg-color: #2d3436;")
-style.append("}")
-style.append("")
-style.append("body {")
-style.append("  margin: 0;")
-style.append("  padding: 0;")
-style.append("  background: var(--main-bg-color);")
-style.append("  font: 15px Arial, Helvetica, sans-serif;")
-style.append("}")
-style.append("")
-style.append("a {")
-style.append("  text-decoration: none;")
-style.append("}")
-style.append("")
-style.append("ul {")
-style.append("  list-style: none;")
-style.append("  padding-left: 0;")
-style.append("}")
-style.append("")
-style.append(".container {")
-style.append("  width: 80%;")
-style.append("  margin: auto;")
-style.append("  overflow: hidden;")
-style.append("}")
-style.append("")
-style.append(".manga{")
-style.append("  text-align: center;")
-style.append("}")
-style.append("")
-style.append(".chapter-bar {")
-style.append("  display: flex;")
-style.append("  margin: 10px auto;")
-style.append("  justify-content: center;")
-style.append("  align-items: center;")
-style.append("}")
-style.append("")
-style.append(".chapter-title {")
-style.append("  font-size: 18px;")
-style.append("  color: var(--main-fore-color);")
-style.append("  padding: 7px 20px;")
-style.append("  border: 2px solid var(--main-fore-color);")
-style.append("  border-radius: 5px;")
-style.append("  text-decoration: none;")
-style.append("}")
-style.append("")
-style.append(".title-container {")
-style.append("  display: flex;")
-style.append("  margin: 10px auto;")
-style.append("  justify-content: center;")
-style.append("  align-items: center;")
-style.append("}")
-style.append("")
-style.append(".manga-title {")
-style.append("  font-size: 22px;")
-style.append("  color: var(--main-fore-color);")
-style.append("  border: 2px solid var(--main-fore-color);")
-style.append("  border-radius: 5px;")
-style.append("  text-transform: capitalize;")
-style.append("  text-align: center;")
-style.append("  margin: 20px auto 0 auto;")
-style.append("  padding: 10px 30px;")
-style.append("}")
-style.append("")
-style.append(".title {")
-style.append("  transition: .2s;")
-style.append("}")
-style.append("")
-style.append(".title:hover {")
-style.append("  background-color: var(--main-fore-color);")
-style.append("  color: var(--main-bg-color);")
-style.append("}")
-style.append("")
-style.append(".btn {")
-style.append("  border: none;")
-style.append("  font-family: inherit;")
-style.append("  font-size: inherit;")
-style.append("  color: inherit;")
-style.append("  background: none;")
-style.append("  cursor: pointer;")
-style.append("  padding: 9px 20px;")
-style.append("  min-width: 100px;")
-style.append("  display: inline-block;")
-style.append("  margin: 5px 10px;")
-style.append("  text-transform: uppercase;")
-style.append("  text-decoration: none;")
-style.append("  text-align: center;")
-style.append("  letter-spacing: 1px;")
-style.append("  font-weight: 600;")
-style.append("  outline: none;")
-style.append("  position: relative;")
-style.append("  -webkit-transition: all 0.3s;")
-style.append("  -moz-transition: all 0.3s;")
-style.append("  transition: all 0.3s;")
-style.append("}")
-style.append("")
-style.append(".btn:after {")
-style.append("  content: '';")
-style.append("  position: absolute;")
-style.append("  z-index: -1;")
-style.append("  -webkit-transition: all 0.3s;")
-style.append("  -moz-transition: all 0.3s;")
-style.append("  transition: all 0.3s;")
-style.append("}")
-style.append("")
-style.append("/* Button 1 */")
-style.append(".btn-1 {")
-style.append("  border: 2px solid var(--main-fore-color);")
-style.append("  color: var(--main-fore-color);")
-style.append("}")
-style.append("")
-style.append(".btn-left {")
-style.append("  border-radius: 30px 5px 5px 30px;")
-style.append("}")
-style.append("")
-style.append(".btn-right {")
-style.append("  border-radius: 5px 30px 30px 5px;")
-style.append("}")
-style.append("")
-style.append("/* Button 1d */")
-style.append(".btn-1d {")
-style.append("  overflow: hidden;")
-style.append("}")
-style.append("")
-style.append(".btn-1d:after {")
-style.append("  width: 0;")
-style.append("  height: 103%;")
-style.append("  top: 50%;")
-style.append("  left: 50%;")
-style.append("  background: var(--main-fore-color);")
-style.append("  opacity: 0;")
-style.append("  -webkit-transform: translateX(-50%) translateY(-50%);")
-style.append("  -moz-transform: translateX(-50%) translateY(-50%);")
-style.append("  -ms-transform: translateX(-50%) translateY(-50%);")
-style.append("  transform: translateX(-50%) translateY(-50%);")
-style.append("}")
-style.append("")
-style.append(".btn-1d:hover,")
-style.append(".btn-1d:active {")
-style.append("  color: var(--main-bg-color);")
-style.append("}")
-style.append("")
-style.append(".btn-1d:hover:after {")
-style.append("  width: 90%;")
-style.append("  opacity: 1;")
-style.append("}")
-style.append("")
-style.append(".btn-1d:active:after {")
-style.append("  width: 101%;")
-style.append("  opacity: 1;")
-style.append("}")
-style.append("")
-style.append(".page {")
-style.append("  padding: 0;")
-style.append("  margin: 0 auto;")
-style.append("  display: block;")
-style.append("}")
+style = '''
+
+:root {
+    --main-fore-color: #039be5;
+    --main-bg-color: #2d3436;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--main-bg-color);
+    font: 15px Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.manga {
+    text-align: center;
+}
+
+.chapter-bar {
+    display: flex;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.chapter-title {
+    font-size: 18px;
+    color: var(--main-fore-color);
+    padding: 7px 20px;
+    border: 2px solid var(--main-fore-color);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.title-container {
+    display: flex;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.manga-title {
+    font-size: 22px;
+    color: var(--main-fore-color);
+    border: 2px solid var(--main-fore-color);
+    border-radius: 5px;
+    text-transform: capitalize;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    padding: 10px 30px;
+}
+
+.title {
+    transition: .2s;
+}
+
+.title:hover {
+    background-color: var(--main-fore-color);
+    color: var(--main-bg-color);
+}
+
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 9px 20px;
+    min-width: 100px;
+    display: inline-block;
+    margin: 5px 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 600;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+/* Button 1 */
+.btn-1 {
+    border: 2px solid var(--main-fore-color);
+    color: var(--main-fore-color);
+}
+
+.btn-left {
+    border-radius: 30px 5px 5px 30px;
+}
+
+.btn-right {
+    border-radius: 5px 30px 30px 5px;
+}
+
+/* Button 1d */
+.btn-1d {
+    overflow: hidden;
+}
+
+.btn-1d:after {
+    width: 0;
+    height: 103%;
+    top: 50%;
+    left: 50%;
+    background: var(--main-fore-color);
+    opacity: 0;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.btn-1d:hover,
+.btn-1d:active {
+    color: var(--main-bg-color);
+}
+
+.btn-1d:hover:after {
+    width: 90%;
+    opacity: 1;
+}
+
+.btn-1d:active:after {
+    width: 101%;
+    opacity: 1;
+}
+
+.page {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 5px;
+    z-index: 1!important;
+}'''

@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 
 LOG_FORMAT = '[%(levelname)s] [%(asctime)s] %(message)s'
-logging.basicConfig(filename='Composition.log',
+logging.basicConfig(filename='log.log',
                     level=logging.ERROR,
                     format=LOG_FORMAT)
 logger = logging.getLogger()
