@@ -25,8 +25,11 @@ from modules.custom_style import custom_style
 import http.server
 import socketserver
 
+
+
 class HtmlManager(QObject):
 
+    PORT = 8000
     finished = pyqtSignal()
 
     def __init__(self):
@@ -223,7 +226,7 @@ class HtmlManager(QObject):
         returns True if successful
         '''
         if os.path.exists(self.main_menu):
-            webbrowser.open('http://localhost:8080/web')
+            webbrowser.open('http://localhost:{}/web'.format(self.PORT))
             return True
         else:
             return False
@@ -249,9 +252,8 @@ class HtmlManager(QObject):
             f.write(text)
 
     def web_server(self):
-        PORT = 8000
         Handler = http.server.SimpleHTTPRequestHandler
 
-        with socketserver.TCPServer(("", PORT), Handler) as httpd:
-            print("serving at port", PORT)
+        with socketserver.TCPServer(("", self.PORT), Handler) as httpd:
+            print("Serving at port", self.PORT)
             httpd.serve_forever()
