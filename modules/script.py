@@ -1,5 +1,6 @@
 script = """
 
+
 var MANGA_FOLDER_NAME = 'Manga';
 var DATA_FILE_NAME = 'data.json';
 
@@ -118,10 +119,12 @@ function loadChapter(chapter_name, page_list) {
     $('#img-container').empty();
 
     setCurrentChapterIndex(Object.keys(getChapterList()).indexOf(chapter_name));
+    margin = getReadingStyle();
 
     $.each(page_list, function(index, value){
         $('<img />')
         .attr('src', '../'+MANGA_FOLDER_NAME+'/'+getMangaName()+'/'+chapter_name+'/'+value)
+        .css('margin', margin)
         .appendTo('#img-container');
     });
 }
@@ -196,10 +199,10 @@ if( getChapterList() == null ||
         loadChapterWithIndex(getCurrentChapterIndex());
     }
 
-if (getReadingStyle() != null) {
-    applyStyle(getReadingStyle());
+if (getReadingStyle() == null) {
+    setReadingStyle(ReadingStyle.CLASSIC);
 }else{
-    applyStyle(ReadingStyle.CLASSIC);
+    setReadingStyle(getReadingStyle());
 }
 
 // end init"""
