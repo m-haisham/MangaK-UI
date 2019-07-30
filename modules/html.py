@@ -2,6 +2,8 @@ import json
 import os
 import re
 import webbrowser
+import threading
+import unicodedata
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -11,6 +13,17 @@ from modules.compostion import numericalSort
 from modules.settings import Settings
 from modules.tree import get_dirs
 
+from modules.index import index
+
+from modules.bootstrapcss import bootstrapcss
+from modules.bootstrapjs import bootstrapjs
+
+from modules.jquery import jquery
+from modules.script import script
+from modules.custom_style import custom_style
+
+import http.server
+import socketserver
 
 class HtmlManager(QObject):
 
@@ -25,19 +38,24 @@ class HtmlManager(QObject):
         if not os.path.exists(Settings.web_files_location):
             os.mkdir(Settings.web_files_location)
         
-        if not os.path.exists(os.path.join(Settings.web_files_location, Settings.style_save_file)):
-            from modules.styles import style
+        if not os.path.exists(Settings.css_folder):
+            os.mkdir(Settings.css_folder)
 
-            with open(os.path.join(Settings.web_files_location, Settings.style_save_file) , 'w') as f:
-                f.write(style)
+        if not os.path.exists(Settings.js_folder):
+            os.mkdir(Settings.js_folder)
 
-        if not os.path.exists(os.path.join(Settings.web_files_location, Settings.web_keybinding)):
-            from modules.keybinding import keybinding
-
-            with open(os.path.join(Settings.web_files_location, Settings.web_keybinding) , 'w') as f:
-                f.write(keybinding)
+        self.create_file(os.path.join(Settings.web_files_location, Settings.html_index), index)
+        self.create_file(os.path.join(Settings.css_folder, Settings.css_bootstrap), bootstrapcss)
+        self.create_file(os.path.join(Settings.js_folder , Settings.js_bootstrap), bootstrapjs)
+        self.create_file(os.path.join(Settings.js_folder , Settings.js_jquery), jquery)
+        self.create_file(os.path.join(Settings.js_folder , Settings.js_custom), script)
+        self.create_file(os.path.join(Settings.css_folder, Settings.css_custom), custom_style)
 
         self.main_menu = os.path.join(Settings.web_files_location, 'index.html')
+
+        thread = threading.Thread(target=self.web_server)
+        thread.daemon = True
+        thread.start()
 
     def generate_new_chapter(self, manga_title: str, chapter_title: str, page_list: str, destination, prefix='', previous = '#', next = '#'):
         '''
@@ -142,6 +160,16 @@ class HtmlManager(QObject):
             f.write(doc.getvalue())
 
     def generate_web(self):
+        
+        # generate manga list
+        all_manga_keys = get_dirs(Settings.manga_save_path)[0]
+
+        with open(Settings.manga_data_file, 'w') as f:
+            json.dump(all_manga_keys, f)
+        
+        self.finished.emit()
+
+    def generates_web(self):
         '''
         Uses the tree (which can be generated using MangaManager class) to generate all the necessary html files and links them
         Root is index.html
@@ -195,7 +223,7 @@ class HtmlManager(QObject):
         returns True if successful
         '''
         if os.path.exists(self.main_menu):
-            webbrowser.open('file://'+os.path.realpath(self.main_menu))
+            webbrowser.open('http://localhost:8080/web')
             return True
         else:
             return False
@@ -212,3 +240,18 @@ class HtmlManager(QObject):
         '''
         new = re.sub(r'[ ]', '%20', source)
         return new
+
+    def create_file(self, path, text):
+        if os.path.exists(path):
+            return
+        
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(text)
+
+    def web_server(self):
+        PORT = 8000
+        Handler = http.server.SimpleHTTPRequestHandler
+
+        with socketserver.TCPServer(("", PORT), Handler) as httpd:
+            print("serving at port", PORT)
+            httpd.serve_forever()

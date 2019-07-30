@@ -23,7 +23,7 @@ def generate_chapter_tree(manga_directory : str) -> None:
     with open(os.path.join(manga_directory, Settings.manga_tree_name)+'.json', 'w') as f:
         json.dump(chapter_dict, f)
 
-def get_dirs(path : str) -> tuple:
+def get_dirs(path : str) -> (list, list): # dirs, files
         '''
         Seperates the files and folders of directory
 

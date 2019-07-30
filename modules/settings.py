@@ -13,6 +13,19 @@ class Settings:
     mangakakalot_home = 'https://mangakakalot.com/page'
     web_keybinding = 'keybinding.js'
 
+    manga_data_file = os.path.join(web_files_location, 'data.json')
+
+    html_index = 'index.html'
+
+    css_folder = os.path.join(web_files_location, 'css')
+    css_custom = 'custom-style.css'
+    css_bootstrap = 'bootstrap.min.css'
+
+    js_folder = os.path.join(web_files_location, 'js')
+    js_jquery = 'jquery-1.12.4.min.js'
+    js_bootstrap = 'bootstrap.min.js'
+    js_custom = 'script.js'
+
     def __init__(self):
         if self.settings_exists():
             self.load_settings()
