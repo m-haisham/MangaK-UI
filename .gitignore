@@ -149,6 +149,7 @@ dmypy.json
 *.html
 *.css
 *.js
+*.map
 
 // other
 *.json
