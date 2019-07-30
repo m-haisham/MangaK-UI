@@ -1,6 +1,7 @@
 script = """
 
 
+
 var MANGA_FOLDER_NAME = 'Manga';
 var DATA_FILE_NAME = 'data.json';
 
@@ -87,7 +88,6 @@ function removeCurrentChapterIndex() {
     localStorage.removeItem('ccli');
 }
 
-
 // end local storage
 
 // loading
@@ -100,6 +100,7 @@ $('.previous-page').click(function () {
 $('.next-page').click(function () { 
     changeChapterBy(1);
 });
+
 
 function changeChapterBy(i) {
     setCurrentChapterIndex(Math.max((getCurrentChapterIndex() + i) % Object.keys(getChapterList()).length, 0));

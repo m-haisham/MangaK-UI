@@ -42,9 +42,9 @@ def dir_to_pdf(path, save_path):
 
             # if image has transparency
             if 'transparency' in new_img.info:
-
+        
                 # convert to RGBA mode
-                new_img.convert('RGBA')
+                new_img = new_img.convert('RGBA')
 
             # if image mode is RGBA
             if(new_img.mode == 'RGBA'):
@@ -77,7 +77,7 @@ def dir_to_pdf(path, save_path):
         with open(os.path.join(save_path, os.path.basename(os.path.normpath(path)) + '.pdf'), 'wb') as f:
             f.write(img2pdf.convert(file_path_list))
     except Exception as e:
-        logger.error('[%s] [%s] %s' % (type(e).__name__.upper(), ' '.join(os.path.basename(os.path.normpath(path).split('_')).upper(), e)))
+        logger.error('[%s] [%s] %s' % (type(e).__name__.upper(), path, e))
 
 
 def stack(folder_path, save_path, end='.jpg', new_width=None):
