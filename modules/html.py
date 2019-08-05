@@ -25,8 +25,6 @@ from modules.custom_style import custom_style
 import http.server
 import socketserver
 
-
-
 class HtmlManager(QObject):
 
     PORT = 8000
@@ -226,7 +224,7 @@ class HtmlManager(QObject):
         returns True if successful
         '''
         if os.path.exists(self.main_menu):
-            webbrowser.open('http://localhost:{}/web'.format(self.PORT))
+            webbrowser.open(f'http://localhost:{self.PORT}/web')
             return True
         else:
             return False

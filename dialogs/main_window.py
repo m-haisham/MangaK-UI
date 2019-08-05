@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'main.ui'
+# Form implementation generated from reading ui file 'C:\Users\User\Documents\Python\MangaK UI\dialogs\main.ui'
 #
 # Created by: PyQt5 UI code generator 5.12.2
 #
@@ -189,6 +189,9 @@ class Ui_MainWindow(object):
         self.selectAllMangaButton = QtWidgets.QPushButton(self.widget_3)
         self.selectAllMangaButton.setObjectName("selectAllMangaButton")
         self.horizontalLayout_2.addWidget(self.selectAllMangaButton)
+        self.ChapterBrowserPushButton = QtWidgets.QPushButton(self.widget_3)
+        self.ChapterBrowserPushButton.setObjectName("ChapterBrowserPushButton")
+        self.horizontalLayout_2.addWidget(self.ChapterBrowserPushButton)
         self.inverseSelectedMangaButton = QtWidgets.QPushButton(self.widget_3)
         self.inverseSelectedMangaButton.setObjectName("inverseSelectedMangaButton")
         self.horizontalLayout_2.addWidget(self.inverseSelectedMangaButton)
@@ -475,11 +478,16 @@ class Ui_MainWindow(object):
         self.actionThumbnails = QtWidgets.QAction(MainWindow)
         self.actionThumbnails.setCheckable(True)
         self.actionThumbnails.setObjectName("actionThumbnails")
+        self.actionBData = QtWidgets.QAction(MainWindow)
+        self.actionBData.setStatusTip("")
+        self.actionBData.setWhatsThis("")
+        self.actionBData.setObjectName("actionBData")
         self.menuFile.addAction(self.actionChapterView)
         self.menuFile.addAction(self.actionDownloadsView)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuTree.addAction(self.actionGenerate)
+        self.menuTree.addAction(self.actionBData)
         self.menuComposition.addAction(self.actionCompositeJpg)
         self.menuComposition.addAction(self.actionCompositePdf)
         self.menuStartup.addAction(self.actionLoadPopular)
@@ -523,6 +531,7 @@ class Ui_MainWindow(object):
         self.directNextButton.setText(_translate("MainWindow", "Next"))
         self.mangaTitle.setText(_translate("MainWindow", "Manga Dowload"))
         self.selectAllMangaButton.setText(_translate("MainWindow", "Select all"))
+        self.ChapterBrowserPushButton.setText(_translate("MainWindow", "Browser"))
         self.inverseSelectedMangaButton.setText(_translate("MainWindow", "Inverse selection"))
         self.selectedMangaDownloadButton.setText(_translate("MainWindow", "Download"))
         self.totalDownloadProgressLabel.setText(_translate("MainWindow", "Total download"))
@@ -543,7 +552,7 @@ class Ui_MainWindow(object):
         self.refreshTopButton.setText(_translate("MainWindow", "Refresh"))
         self.nextTopButton.setText(_translate("MainWindow", "Next"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.menuTree.setTitle(_translate("MainWindow", "Tree"))
+        self.menuTree.setTitle(_translate("MainWindow", "Generate"))
         self.menuSetting.setTitle(_translate("MainWindow", "Setting"))
         self.menuComposition.setTitle(_translate("MainWindow", "Composition"))
         self.menuStartup.setToolTip(_translate("MainWindow", "Runs the selected Functions on startup"))
@@ -555,7 +564,7 @@ class Ui_MainWindow(object):
         self.actionKeep_originals.setText(_translate("MainWindow", "Keep originals"))
         self.actionCompositeJpg.setText(_translate("MainWindow", "Jpg"))
         self.actionCompositePdf.setText(_translate("MainWindow", "Pdf"))
-        self.actionGenerate.setText(_translate("MainWindow", "Generate"))
+        self.actionGenerate.setText(_translate("MainWindow", "Tree"))
         self.actionSettingsApply.setText(_translate("MainWindow", "Apply"))
         self.actionDocumentation.setText(_translate("MainWindow", "Documentation"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
@@ -566,5 +575,7 @@ class Ui_MainWindow(object):
         self.actionLoadTop10.setText(_translate("MainWindow", "Load top10"))
         self.actionThumbnails.setText(_translate("MainWindow", "Thumbnails"))
         self.actionThumbnails.setToolTip(_translate("MainWindow", "Not loading thumbnails makes the loading process faster in general"))
+        self.actionBData.setText(_translate("MainWindow", "BData"))
+        self.actionBData.setToolTip(_translate("MainWindow", "Generate manga list needed for the browser"))
 
 

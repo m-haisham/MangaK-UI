@@ -102,7 +102,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>2</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -413,6 +413,13 @@
                   <widget class="QPushButton" name="selectAllMangaButton">
                    <property name="text">
                     <string>Select all</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="ChapterBrowserPushButton">
+                   <property name="text">
+                    <string>Browser</string>
                    </property>
                   </widget>
                  </item>
@@ -999,9 +1006,10 @@
    </widget>
    <widget class="QMenu" name="menuTree">
     <property name="title">
-     <string>Tree</string>
+     <string>Generate</string>
     </property>
     <addaction name="actionGenerate"/>
+    <addaction name="actionBData"/>
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
@@ -1096,7 +1104,7 @@
   </action>
   <action name="actionGenerate">
    <property name="text">
-    <string>Generate</string>
+    <string>Tree</string>
    </property>
   </action>
   <action name="actionSettingsApply">
@@ -1157,6 +1165,20 @@
    </property>
    <property name="toolTip">
     <string>Not loading thumbnails makes the loading process faster in general</string>
+   </property>
+  </action>
+  <action name="actionBData">
+   <property name="text">
+    <string>BData</string>
+   </property>
+   <property name="toolTip">
+    <string>Generate manga list needed for the browser</string>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="whatsThis">
+    <string/>
    </property>
   </action>
  </widget>

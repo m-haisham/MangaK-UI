@@ -7,6 +7,8 @@ class ThreadedWebGenerate(object):
     def __init__(self):
         super().__init__()
 
+        self.should_open_browser = True
+
         self.html = HtmlManager()
         self.html_thread = QThread()
 
@@ -23,4 +25,11 @@ class ThreadedWebGenerate(object):
 
     def on_web_finished(self):
         self.setEnabled(True)
-        self.html.open()
+        if self.should_open_browser:
+            self.html.open()
+        self.should_open_browser = True
+
+    def on_bdata_clicked(self):
+        self.should_open_browser = False
+        self.setEnabled(False)
+        self.html_thread.start()

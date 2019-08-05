@@ -46,6 +46,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'download': self.findChild(QAction, 'actionDownloadsView'),
             'exit': self.findChild(QAction, 'actionExit'),
             'generate_tree': self.findChild(QAction, 'actionGenerate'),
+            'generate_bdata': self.findChild(QAction, 'actionBData'),
             'keep_originals': self.findChild(QAction, 'actionKeep_originals'),
             'composite_jpg': self.findChild(QAction, 'actionCompositeJpg'),
             'startup_popular': self.findChild(QAction, 'actionLoadPopular'),
@@ -60,6 +61,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['download'].triggered.connect(lambda: self.stack.setCurrentIndex(3))
         self.navbar['exit'].triggered.connect(self.close)
         self.navbar['generate_tree'].triggered.connect(self.on_generate_clicked)
+        self.navbar['generate_bdata'].triggered.connect(self.on_bdata_clicked)
         self.navbar['about'].triggered.connect(lambda: QMessageBox.information(self, 'About', 'Author: mHaisham\nDescription: Supports download from mangakakalot.com, composition options and viewing the downloaded manga'))
         
         self.navbar['startup_popular'].setChecked(self.settings.settings['startup_popular'])
@@ -147,6 +149,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.download = {
             'title': self.findChild(QLabel, 'mangaTitle'),
             'select_all': self.findChild(QPushButton, 'selectAllMangaButton'),
+            'browser': self.findChild(QPushButton, 'ChapterBrowserPushButton'),
             'inverse': self.findChild(QPushButton, 'inverseSelectedMangaButton'),
             'list': self.findChild(QListWidget, 'chapterListWidget'),
             'progress_bar': self.findChild(QProgressBar, 'mangaDataLoadProgressBar'),
@@ -156,6 +159,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.download['list'].doubleClicked.connect(self.on_download_double_clicked)
         self.download['progress_bar'].hide()
         self.download['select_all'].clicked.connect(self.select_all)
+        self.download['browser'].clicked.connect(self.on_chapter_view_browser_clicked)
         self.download['inverse'].clicked.connect(self.inverse_all)
         self.download['download_button'].clicked.connect(self.on_download_clicked)
 

@@ -2,6 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+import webbrowser
 from modules.chapterList import ChapterListLoader
 
 class ThreadedMangaLoad(object):
@@ -111,6 +112,9 @@ class ThreadedMangaLoad(object):
             return
 
         self.start_download_task(self.download['title'].text(), checked_chapters)
+    
+    def on_chapter_view_browser_clicked(self):
+        webbrowser.open(self.loader.manga_link)
 
     def on_download_double_clicked(self, i: QModelIndex) -> None:
         if self.last_double == None:
