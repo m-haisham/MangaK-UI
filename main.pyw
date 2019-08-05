@@ -21,15 +21,16 @@ from ui.search import ThreadedSearch
 from ui.top10 import Top10List
 from ui.tree_gen import ThreadedTreeGenerate
 from ui.web import ThreadedWebGenerate
+from ui.favouriteHandler import FavouriteHandler
 
 
 class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate,
-         ThreadedWebGenerate, PopularPage, Top10List):
+         ThreadedWebGenerate, PopularPage, Top10List, FavouriteHandler):
     def __init__(self, _app: QApplication):
-        # super(Ui, self).__init__()
+        super(Ui, self).__init__()
         uic.loadUi('dialogs/main.ui', self)
 
-        Ui_MainWindow().setupUi(self)
+        # Ui_MainWindow().setupUi(self)
         self.show()
         self.setEnabled(False)
 
@@ -43,6 +44,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
         self.navbar = {
             'chapter': self.findChild(QAction, 'actionChapterView'),
+            'favourite': self.findChild(QAction, 'actionFavourites'),
             'download': self.findChild(QAction, 'actionDownloadsView'),
             'exit': self.findChild(QAction, 'actionExit'),
             'generate_tree': self.findChild(QAction, 'actionGenerate'),
@@ -58,6 +60,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'about': self.findChild(QAction, 'actionAbout'),
         }
         self.navbar['chapter'].triggered.connect(lambda: self.stack.setCurrentIndex(2))
+        self.navbar['favourite'].triggered.connect(lambda: self.stack.setCurrentIndex(6))
         self.navbar['download'].triggered.connect(lambda: self.stack.setCurrentIndex(3))
         self.navbar['exit'].triggered.connect(self.close)
         self.navbar['generate_tree'].triggered.connect(self.on_generate_clicked)
@@ -195,6 +198,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         }
 
         self.favourite['progress'].hide()
+
+        self.favourite['refresh'].clicked.connect(self.on_favourite_refresh)
 
         if self.settings.settings['startup_popular']:
             self.on_refresh()

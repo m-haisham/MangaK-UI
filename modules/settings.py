@@ -14,6 +14,7 @@ class Settings:
     web_keybinding = 'keybinding.js'
 
     manga_data_file = os.path.join(web_files_location, 'data.json')
+    favourite_data_file = os.path.join(manga_save_path, 'fave.json')
 
     html_index = 'index.html'
 

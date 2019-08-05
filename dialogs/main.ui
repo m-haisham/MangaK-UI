@@ -1049,8 +1049,14 @@
           </item>
           <item row="2" column="0">
            <widget class="QProgressBar" name="FavouriteProgressBar">
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>0</number>
+            </property>
             <property name="value">
-             <number>24</number>
+             <number>-1</number>
             </property>
             <property name="textVisible">
              <bool>false</bool>
@@ -1095,6 +1101,7 @@
      <string>File</string>
     </property>
     <addaction name="actionChapterView"/>
+    <addaction name="actionFavourites"/>
     <addaction name="actionDownloadsView"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -1274,6 +1281,11 @@
    </property>
    <property name="whatsThis">
     <string/>
+   </property>
+  </action>
+  <action name="actionFavourites">
+   <property name="text">
+    <string>Favourites</string>
    </property>
   </action>
  </widget>

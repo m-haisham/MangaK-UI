@@ -39,4 +39,4 @@ if __name__ == "__main__":
     create_py_list('modules/script.js', 'modules/script.py')
 
     create_py_list('modules/bootstrap.min.css', 'modules/bootstrapcss.py')
-    create_py_list('modules/custom-style.css', 'modules/custom-style.py')
+    create_py_list('modules/custom-style.css', 'modules/custom_style.py')
