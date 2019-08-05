@@ -23,17 +23,17 @@ from ui.tree_gen import ThreadedTreeGenerate
 from ui.web import ThreadedWebGenerate
 
 
-
-class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate, ThreadedWebGenerate, PopularPage, Top10List):
-    def __init__(self, app : QApplication):
-        super(Ui, self).__init__()
-        # uic.loadUi('dialogs/main.ui', self)
+class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate,
+         ThreadedWebGenerate, PopularPage, Top10List):
+    def __init__(self, _app: QApplication):
+        # super(Ui, self).__init__()
+        uic.loadUi('dialogs/main.ui', self)
 
         Ui_MainWindow().setupUi(self)
         self.show()
         self.setEnabled(False)
 
-        self.app = app
+        self.app = _app
 
         self.settings = Settings()
         self.dark_palette = QPalette()
@@ -62,8 +62,12 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['exit'].triggered.connect(self.close)
         self.navbar['generate_tree'].triggered.connect(self.on_generate_clicked)
         self.navbar['generate_bdata'].triggered.connect(self.on_bdata_clicked)
-        self.navbar['about'].triggered.connect(lambda: QMessageBox.information(self, 'About', 'Author: mHaisham\nDescription: Supports download from mangakakalot.com, composition options and viewing the downloaded manga'))
-        
+        self.navbar['about'].triggered.connect(lambda: QMessageBox.information(self, 'About',
+                                                                               'Author: mHaisham\nDescription: '
+                                                                               'Supports download from '
+                                                                               'mangakakalot.com, composition options '
+                                                                               'and viewing the downloaded manga'))
+
         self.navbar['startup_popular'].setChecked(self.settings.settings['startup_popular'])
         self.navbar['startup_top10'].setChecked(self.settings.settings['startup_top10'])
         self.navbar['composite_jpg'].setChecked(self.settings.settings['composite_jpg'])
@@ -87,11 +91,11 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'direct': self.findChild(QPushButton, 'directNavButton'),
             'browser': self.findChild(QPushButton, 'viewFunButton')
         }
-        
-        self.navigation['hot'].clicked.connect(lambda : self.stack.setCurrentIndex(4))
-        self.navigation['top10'].clicked.connect(lambda : self.stack.setCurrentIndex(5))
-        self.navigation['search'].clicked.connect(lambda : self.stack.setCurrentIndex(0))
-        self.navigation['direct'].clicked.connect(lambda : self.stack.setCurrentIndex(1))
+
+        self.navigation['hot'].clicked.connect(lambda: self.stack.setCurrentIndex(4))
+        self.navigation['top10'].clicked.connect(lambda: self.stack.setCurrentIndex(5))
+        self.navigation['search'].clicked.connect(lambda: self.stack.setCurrentIndex(0))
+        self.navigation['direct'].clicked.connect(lambda: self.stack.setCurrentIndex(1))
         self.navigation['browser'].clicked.connect(self.on_browser_clicked)
 
         self.popular = {
@@ -155,7 +159,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'progress_bar': self.findChild(QProgressBar, 'mangaDataLoadProgressBar'),
             'download_button': self.findChild(QPushButton, 'selectedMangaDownloadButton')
         }
-        
+
         self.download['list'].doubleClicked.connect(self.on_download_double_clicked)
         self.download['progress_bar'].hide()
         self.download['select_all'].clicked.connect(self.select_all)
@@ -182,6 +186,16 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.progress['open_button'].hide()
         self.progress['open_button'].clicked.connect(self.on_progress_open_clicked)
 
+        self.favourite = {
+            'table': self.findChild(QTableWidget, 'FavouriteResultTable'),
+            'progress': self.findChild(QProgressBar, 'FavouriteProgressBar'),
+            'remove': self.findChild(QPushButton, 'FavouriteRemoveButton'),
+            'go': self.findChild(QPushButton, 'FavouriteGoButton'),
+            'refresh': self.findChild(QPushButton, 'FavouriteRefreshButton')
+        }
+
+        self.favourite['progress'].hide()
+
         if self.settings.settings['startup_popular']:
             self.on_refresh()
         if self.settings.settings['startup_top10']:
@@ -205,7 +219,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             self.navbar['keep_originals'].isChecked(),
             self.navbar['download_thumbnails'].isChecked()
         )
-    
+
     def init_dark_palette(self):
         self.dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
         self.dark_palette.setColor(QPalette.WindowText, Qt.white)
@@ -226,6 +240,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.app.setPalette(self.dark_palette if is_dark else self.app.style().standardPalette())
         if save:
             self.settings.dark_mode_enabled(is_dark)
+
 
 if __name__ == "__main__":
     try:
