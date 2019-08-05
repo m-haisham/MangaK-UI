@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from modules.settings import Settings
+
 
 def j_call(*, file: str, args: list = []):
     """ call java (file) (.jar) as a subprocess with arguments (args) """
@@ -18,3 +20,7 @@ def j_call(*, file: str, args: list = []):
                                file,
                            ] + args)
     return child.returncode
+
+
+def fave(args: list):
+    return j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'mangakakalot'] + args)

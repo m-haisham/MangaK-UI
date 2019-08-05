@@ -102,7 +102,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>6</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -461,11 +461,22 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="selectedMangaDownloadButton">
-                 <property name="text">
-                  <string>Download</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QPushButton" name="FavouriteThisMangaPushButton">
+                   <property name="text">
+                    <string>Fave</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="selectedMangaDownloadButton">
+                   <property name="text">
+                    <string>Download</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item>
                 <widget class="QProgressBar" name="mangaDataLoadProgressBar">
@@ -1137,6 +1148,7 @@
      <property name="title">
       <string>Startup</string>
      </property>
+     <addaction name="actionLoadFavourites"/>
      <addaction name="actionLoadPopular"/>
      <addaction name="actionLoadTop10"/>
     </widget>
@@ -1286,6 +1298,14 @@
   <action name="actionFavourites">
    <property name="text">
     <string>Favourites</string>
+   </property>
+  </action>
+  <action name="actionLoadFavourites">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Load Favourites</string>
    </property>
   </action>
  </widget>

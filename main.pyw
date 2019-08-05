@@ -28,9 +28,9 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
          ThreadedWebGenerate, PopularPage, Top10List, FavouriteHandler):
     def __init__(self, _app: QApplication):
         super(Ui, self).__init__()
-        uic.loadUi('dialogs/main.ui', self)
+        # uic.loadUi('dialogs/main.ui', self)
 
-        # Ui_MainWindow().setupUi(self)
+        Ui_MainWindow().setupUi(self)
         self.show()
         self.setEnabled(False)
 
@@ -51,6 +51,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'generate_bdata': self.findChild(QAction, 'actionBData'),
             'keep_originals': self.findChild(QAction, 'actionKeep_originals'),
             'composite_jpg': self.findChild(QAction, 'actionCompositeJpg'),
+            'startup_fave': self.findChild(QAction, 'actionLoadFavourites'),
             'startup_popular': self.findChild(QAction, 'actionLoadPopular'),
             'startup_top10': self.findChild(QAction, 'actionLoadTop10'),
             'composite_pdf': self.findChild(QAction, 'actionCompositePdf'),
@@ -71,6 +72,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
                                                                                'mangakakalot.com, composition options '
                                                                                'and viewing the downloaded manga'))
 
+        self.navbar['startup_fave'].setChecked(self.settings.settings['startup_fave'])
         self.navbar['startup_popular'].setChecked(self.settings.settings['startup_popular'])
         self.navbar['startup_top10'].setChecked(self.settings.settings['startup_top10'])
         self.navbar['composite_jpg'].setChecked(self.settings.settings['composite_jpg'])
@@ -79,6 +81,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['download_thumbnails'].setChecked(self.settings.settings['download_thumbnails'])
         self.navbar['dark_mode'].setChecked(self.settings.settings['dark_mode'])
 
+        self.navbar['startup_fave'].triggered.connect(self.update_settings)
         self.navbar['startup_popular'].triggered.connect(self.update_settings)
         self.navbar['startup_top10'].triggered.connect(self.update_settings)
         self.navbar['composite_jpg'].triggered.connect(self.update_settings)
@@ -160,6 +163,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'inverse': self.findChild(QPushButton, 'inverseSelectedMangaButton'),
             'list': self.findChild(QListWidget, 'chapterListWidget'),
             'progress_bar': self.findChild(QProgressBar, 'mangaDataLoadProgressBar'),
+            'fave': self.findChild(QPushButton, 'FavouriteThisMangaPushButton'),
             'download_button': self.findChild(QPushButton, 'selectedMangaDownloadButton')
         }
 
@@ -168,6 +172,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.download['select_all'].clicked.connect(self.select_all)
         self.download['browser'].clicked.connect(self.on_chapter_view_browser_clicked)
         self.download['inverse'].clicked.connect(self.inverse_all)
+        self.download['fave'].clicked.connect(self.on_fave_this_clicked)
         self.download['download_button'].clicked.connect(self.on_download_clicked)
 
         self.progress = {
@@ -203,6 +208,8 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.favourite['remove'].clicked.connect(self.on_favourite_delete)
         self.favourite['go'].clicked.connect(self.on_favourite_go)
 
+        if self.settings.settings['startup_fave']:
+            self.on_favourite_refresh()
         if self.settings.settings['startup_popular']:
             self.on_refresh()
         if self.settings.settings['startup_top10']:
@@ -219,6 +226,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
     def update_settings(self):
         self.settings.save_settings(
+            self.navbar['startup_fave'].isChecked(),
             self.navbar['startup_popular'].isChecked(),
             self.navbar['startup_top10'].isChecked(),
             self.navbar['composite_jpg'].isChecked(),

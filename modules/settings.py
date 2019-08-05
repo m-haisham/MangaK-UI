@@ -34,6 +34,7 @@ class Settings:
             self.load_settings()
         else:
             self.settings = {
+                'startup_fave': False,
                 'startup_popular': False,
                 'startup_top10': True,
                 'composite_jpg': False,
@@ -48,11 +49,12 @@ class Settings:
         if not os.path.exists(self.manga_save_path):
             os.mkdir(self.manga_save_path)
 
-    def save_settings(self, startup_popular: bool, startup_top10: bool, composite_jpg: bool, composite_pdf: bool, keep_originals: bool, download_thumbnails: bool) -> None:
-        '''
+    def save_settings(self, startup_fave: bool, startup_popular: bool, startup_top10: bool, composite_jpg: bool, composite_pdf: bool, keep_originals: bool, download_thumbnails: bool) -> None:
+        """
         saves the current settings
-        '''
+        """
         self.settings = {
+            'startup_fave': startup_fave,
             'startup_popular': startup_popular,
             'startup_top10': startup_top10,
             'composite_jpg': composite_jpg,
@@ -66,6 +68,7 @@ class Settings:
 
     def dark_mode_enabled(self, dark_mode : bool) -> None:
         self.settings = {
+            'startup_fave': self.settings['startup_fave'],
             'startup_popular': self.settings['startup_popular'],
             'startup_top10': self.settings['startup_top10'],
             'composite_jpg': self.settings['composite_jpg'],

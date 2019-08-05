@@ -9,6 +9,8 @@ from requests.exceptions import InvalidURL, InvalidSchema, MissingSchema
 from modules.settings import Settings
 
 class Favourite(QObject):
+    on_maximum = pyqtSignal(int)
+    on_progress = pyqtSignal(int)
     finished = pyqtSignal()
 
     def __init__(self):
@@ -32,7 +34,10 @@ class Favourite(QObject):
             self.finished.emit()
             return
 
+        self.on_maximum.emit(len(data))
         self.loaded.clear()
+
+        count = 0
         for _slice in data:
             last_chapter_recorded = _slice['lastChapter']['name']
             self.loaded.append({
@@ -41,6 +46,8 @@ class Favourite(QObject):
                 'chapter': last_chapter_recorded,
                 'status': 'available'
             })
+            count += 1
+            self.on_progress.emit(count)
 
         self.finished.emit()
 

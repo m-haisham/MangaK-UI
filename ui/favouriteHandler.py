@@ -13,14 +13,24 @@ class FavouriteHandler(object):
         self.favourite_handle = Favourite()
         self.favourite_thread = QThread()
 
+        self.favourite_handle.on_progress.connect(self.on_favourite_progress)
+        self.favourite_handle.on_maximum.connect(self.on_favourite_maximum)
+
         self.favourite_handle.moveToThread(self.favourite_thread)
 
         self.favourite_handle.finished.connect(self.on_favourite_loaded)
         self.favourite_thread.started.connect(self.favourite_handle.load)
 
+    def on_favourite_progress(self, i):
+        self.favourite['progress'].setValue(i)
+
+    def on_favourite_maximum(self, i):
+        self.favourite['progress'].setMaximum(i)
+        self.favourite['progress'].setValue(0)
+        self.favourite['progress'].show()
+
     def on_favourite_refresh(self):
         self.set_favourite_controls(False)
-        self.favourite['progress'].show()
         self.favourite_thread.start()
 
     def on_favourite_delete(self):
@@ -31,16 +41,25 @@ class FavouriteHandler(object):
             rows.add(index.row())
             links.add(self.favourite_handle.loaded[index.row()]['url'])
 
-        j_call(file=Settings.kfave_path, args=links)
+        j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'remove']+list(links))
 
         for index in rows:
             self.favourite['table'].removeRow(index)
 
     def on_favourite_go(self):
-        print('go')
+        indexes = self.favourite['table'].selectedIndexes()
+        if len(indexes) != 1:
+            return
 
-    def on_favourite_double_click(self):
-        print('double_click')
+        self.search['next_button'].setEnabled(False)
+        self.load_manga(self.favourite_handle.loaded[indexes[0].row()]['url'])
+
+    def on_favourite_double_click(self, i):
+        if not self.favourite['go'].isEnabled():
+            return
+
+        self.search['next_button'].setEnabled(False)
+        self.load_manga(self.favourite_handle.loaded[i.row()]['url'])
 
     def on_favourite_loaded(self):
         self.favourite_thread.quit()
