@@ -237,4 +237,5 @@ __pycache__\\*.pyc
 *.map
 
 // other
+*.xml
 *.json

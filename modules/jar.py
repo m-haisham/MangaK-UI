@@ -15,7 +15,7 @@ def j_call(*, file: str, args: list = []):
     if args != [] and type(args[0]) != str:
         raise TypeError("'args' must be a list of strings")
     child = subprocess.run([
-                               'java',
+                               'javaw',
                                '-jar',
                                file,
                            ] + args)

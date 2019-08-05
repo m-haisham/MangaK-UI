@@ -102,6 +102,7 @@ class ThreadedMangaLoad(object):
 
     def on_fave_this_clicked(self):
         fave([self.loader.manga_link])
+        self.on_favourite_refresh()
 
     def on_download_clicked(self):
         self.download['download_button'].setEnabled(False)
