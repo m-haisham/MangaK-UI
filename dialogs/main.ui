@@ -982,13 +982,54 @@
         </widget>
         <widget class="QWidget" name="Favourite">
          <layout class="QGridLayout" name="gridLayout_13">
+          <item row="5" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QPushButton" name="FavouriteRemoveButton">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="FavouriteGoButton">
+              <property name="text">
+               <string>Go</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="FavouriteRefreshButton">
+              <property name="text">
+               <string>Refresh</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <widget class="QProgressBar" name="FavouriteProgressBar">
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>0</number>
+            </property>
+            <property name="value">
+             <number>-1</number>
+            </property>
+            <property name="textVisible">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QTableWidget" name="FavouriteResultTable">
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="selectionMode">
-             <enum>QAbstractItemView::SingleSelection</enum>
+             <enum>QAbstractItemView::ExtendedSelection</enum>
             </property>
             <property name="cornerButtonEnabled">
              <bool>false</bool>
@@ -1020,47 +1061,6 @@
               <string>Latest Chapter</string>
              </property>
             </column>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
-            <item>
-             <widget class="QPushButton" name="FavouriteRemoveButton">
-              <property name="text">
-               <string>Remove</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="FavouriteGoButton">
-              <property name="text">
-               <string>Go</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="FavouriteRefreshButton">
-              <property name="text">
-               <string>Refresh</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <widget class="QProgressBar" name="FavouriteProgressBar">
-            <property name="minimum">
-             <number>0</number>
-            </property>
-            <property name="maximum">
-             <number>0</number>
-            </property>
-            <property name="value">
-             <number>-1</number>
-            </property>
-            <property name="textVisible">
-             <bool>false</bool>
-            </property>
            </widget>
           </item>
           <item row="0" column="0">

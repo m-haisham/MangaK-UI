@@ -13,6 +13,8 @@ class Settings:
     mangakakalot_home = 'https://mangakakalot.com/page'
     web_keybinding = 'keybinding.js'
 
+    kfave_path = 'Kfave.jar'
+
     manga_data_file = os.path.join(web_files_location, 'data.json')
     favourite_data_file = os.path.join(manga_save_path, 'fave.json')
 

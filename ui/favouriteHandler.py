@@ -2,6 +2,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from modules.favourite import Favourite
+from modules.jar import j_call
+from modules.settings import Settings
+
 
 class FavouriteHandler(object):
     def __init__(self):
@@ -20,11 +23,29 @@ class FavouriteHandler(object):
         self.favourite['progress'].show()
         self.favourite_thread.start()
 
+    def on_favourite_delete(self):
+        indexes = self.favourite['table'].selectedIndexes()
+        rows = set()
+        links = set()
+        for index in indexes:
+            rows.add(index.row())
+            links.add(self.favourite_handle.loaded[index.row()]['url'])
+
+        j_call(file=Settings.kfave_path, args=links)
+
+        for index in rows:
+            self.favourite['table'].removeRow(index)
+
+    def on_favourite_go(self):
+        print('go')
+
+    def on_favourite_double_click(self):
+        print('double_click')
+
     def on_favourite_loaded(self):
         self.favourite_thread.quit()
         self.favourite['progress'].hide()
 
-        self.favourite['table'].clear()
         self.favourite['table'].setRowCount(len(self.favourite_handle.loaded))
         for i in range(len(self.favourite_handle.loaded)):
             data_piece = self.favourite_handle.loaded[i]

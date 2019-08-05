@@ -8,7 +8,6 @@ from requests.exceptions import InvalidURL, InvalidSchema, MissingSchema
 
 from modules.settings import Settings
 
-
 class Favourite(QObject):
     finished = pyqtSignal()
 
@@ -38,6 +37,7 @@ class Favourite(QObject):
             last_chapter_recorded = _slice['lastChapter']['name']
             self.loaded.append({
                 'title': self.get_name(_slice['manga']['url']),
+                'url': _slice['manga']['url'],
                 'chapter': last_chapter_recorded,
                 'status': 'available'
             })

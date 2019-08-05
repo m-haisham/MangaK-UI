@@ -17,4 +17,4 @@ def j_call(*, file: str, args: list = []):
                                '-jar',
                                file,
                            ] + args)
-    child.check_returncode()
+    return child.returncode

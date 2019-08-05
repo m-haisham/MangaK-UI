@@ -196,10 +196,12 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'go': self.findChild(QPushButton, 'FavouriteGoButton'),
             'refresh': self.findChild(QPushButton, 'FavouriteRefreshButton')
         }
-
+        self.favourite['table'].doubleClicked.connect(self.on_favourite_double_click)
         self.favourite['progress'].hide()
 
         self.favourite['refresh'].clicked.connect(self.on_favourite_refresh)
+        self.favourite['remove'].clicked.connect(self.on_favourite_delete)
+        self.favourite['go'].clicked.connect(self.on_favourite_go)
 
         if self.settings.settings['startup_popular']:
             self.on_refresh()
