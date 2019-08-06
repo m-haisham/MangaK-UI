@@ -1,8 +1,11 @@
 import datetime
+import os
 import re
 import sys
 import traceback
 import logging
+import platform
+from pyshortcuts import make_shortcut
 
 from PyQt5 import uic
 from PyQt5.QtCore import *
@@ -218,7 +221,29 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.set_theme(False)
         self.download_resume_init()
 
+        self.set_fave_startup()
+
         self.setEnabled(True)
+
+    def set_fave_startup(self):
+        home = os.path.expanduser("~")
+        working_directory = os.getcwd()
+        if platform.system() == 'Windows':
+            vbscript = 'mangak.vbs'
+
+            extension = os.path.join('AppData', 'Roaming', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
+            commands = f"""Set oShell = WScript.CreateObject("WScript.shell")
+            oShell.Run "cmd /c cd {working_directory} & javaw -jar {os.path.join(working_directory, Settings.kfave_path)}", 0, false"""
+
+            if os.path.exists(os.path.join(home, extension, vbscript)):
+                return
+
+            print(os.path.join(home, extension, vbscript))
+            print(commands)
+
+            with open(os.path.join(home, extension, vbscript), 'w') as f:
+                f.write(commands)
+
 
     def on_direct_download(self):
         self.direct['input'].setEnabled(False)
