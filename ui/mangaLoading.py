@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 
 import webbrowser
 from modules.chapterList import ChapterListLoader
+from modules.favourite import Favourite
 from modules.jar import fave, FaveThreaded
 
 
@@ -71,7 +72,8 @@ class ThreadedMangaLoad(object):
 
             self.download['list'].addItem(item)
 
-        # TODO add check for favourite if so update information
+        # TODO assign this popup to a button
+        QMessageBox.information(self, 'Updates', '\n'.join(self.loader.u_names))
 
         self.set_controls(True)
         self.download['progress_bar'].hide()
@@ -113,6 +115,10 @@ class ThreadedMangaLoad(object):
     def on_download_clicked(self):
         self.download['download_button'].setEnabled(False)
         item_count = self.download['list'].count()
+
+        # addon functions run here
+        if self.loader.favourited:
+            self.on_fave_this_clicked() # update this mangas information in data
 
         checked_chapters = []
         for i in range(item_count):

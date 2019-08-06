@@ -9,6 +9,8 @@ from PyQt5 import uic
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from requests.exceptions import InvalidSchema, InvalidURL, MissingSchema
+
+from modules.favourite import Favourite
 from modules.settings import Settings
 from modules.compostion import dir_to_pdf, stack
 from modules.tree import generate_chapter_tree
@@ -26,6 +28,10 @@ class ChapterListLoader(QObject):
 
         self.manga_link =''
         self.loaded_list = []
+
+        self.favourited = False
+        self.u_names = []
+        self.u_links = []
 
     def load(self):
         r = None
@@ -53,6 +59,11 @@ class ChapterListLoader(QObject):
             })
             count += 1
             self.progress.emit(count)
+
+        # check for favourite if so update information
+        self.favourited = Favourite.is_favourite(self.manga_link)
+        if self.favourited:
+            self.u_names, self.u_links = Favourite.get_updated_chapters(self.manga_link)
 
         self.finished.emit()
 
