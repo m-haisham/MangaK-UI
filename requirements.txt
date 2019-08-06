@@ -6,5 +6,3 @@ Pillow==6.1.0
 PyQt5==5.12.2
 beautifulsoup4==4.7.1
 werkzeug==0.15.5
-pyshortcuts==1.4
-pywin32==224
