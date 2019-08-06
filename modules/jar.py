@@ -24,6 +24,9 @@ def j_call(*, file: str, args: list = []):
 
 
 def fave(args: list):
+    if not os.path.exists(Settings.favourite_data_file):
+        open(Settings.favourite_data_file, 'w').close()  # create data file if it doesnt exist
+
     return j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'mangakakalot'] + args)
 
 

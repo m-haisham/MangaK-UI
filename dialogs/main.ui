@@ -1207,6 +1207,8 @@
     </property>
     <addaction name="actionGenerate"/>
     <addaction name="actionBData"/>
+    <addaction name="separator"/>
+    <addaction name="actionFavouriteStartup"/>
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
@@ -1390,6 +1392,17 @@
    </property>
    <property name="text">
     <string>Load Favourites</string>
+   </property>
+  </action>
+  <action name="actionFavouriteStartup">
+   <property name="text">
+    <string>Startup</string>
+   </property>
+   <property name="statusTip">
+    <string>Reset startup favourites update check</string>
+   </property>
+   <property name="whatsThis">
+    <string/>
    </property>
   </action>
  </widget>

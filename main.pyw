@@ -48,6 +48,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'exit': self.findChild(QAction, 'actionExit'),
             'generate_tree': self.findChild(QAction, 'actionGenerate'),
             'generate_bdata': self.findChild(QAction, 'actionBData'),
+            'generate_startup': self.findChild(QAction, 'actionFavouriteStartup'),
             'keep_originals': self.findChild(QAction, 'actionKeep_originals'),
             'composite_jpg': self.findChild(QAction, 'actionCompositeJpg'),
             'startup_fave': self.findChild(QAction, 'actionLoadFavourites'),
@@ -64,6 +65,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         self.navbar['download'].triggered.connect(lambda: self.stack.setCurrentIndex(3))
         self.navbar['exit'].triggered.connect(self.close)
         self.navbar['generate_tree'].triggered.connect(self.on_generate_clicked)
+        self.navbar['generate_startup'].triggered.connect(lambda: self.set_fave_startup(override=True))
         self.navbar['generate_bdata'].triggered.connect(self.on_bdata_clicked)
         self.navbar['about'].triggered.connect(lambda: QMessageBox.information(self, 'About',
                                                                                'Author: mHaisham\nDescription: '
@@ -225,7 +227,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
         self.setEnabled(True)
 
-    def set_fave_startup(self):
+    def set_fave_startup(self, override=False):
         home = os.path.expanduser("~")
         working_directory = os.getcwd()
         if platform.system() == 'Windows':
@@ -235,7 +237,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             commands = f"""Set oShell = WScript.CreateObject("WScript.shell")
             oShell.Run "cmd /c cd {working_directory} & javaw -jar {os.path.join(working_directory, Settings.kfave_path)}", 0, false"""
 
-            if os.path.exists(os.path.join(home, extension, vbscript)):
+            if not override and os.path.exists(os.path.join(home, extension, vbscript)):
                 return
 
             print(os.path.join(home, extension, vbscript))

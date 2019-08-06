@@ -575,6 +575,9 @@ class Ui_MainWindow(object):
         self.actionLoadFavourites = QtWidgets.QAction(MainWindow)
         self.actionLoadFavourites.setCheckable(True)
         self.actionLoadFavourites.setObjectName("actionLoadFavourites")
+        self.actionFavouriteStartup = QtWidgets.QAction(MainWindow)
+        self.actionFavouriteStartup.setWhatsThis("")
+        self.actionFavouriteStartup.setObjectName("actionFavouriteStartup")
         self.menuFile.addAction(self.actionChapterView)
         self.menuFile.addAction(self.actionFavourites)
         self.menuFile.addAction(self.actionDownloadsView)
@@ -582,6 +585,8 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionExit)
         self.menuTree.addAction(self.actionGenerate)
         self.menuTree.addAction(self.actionBData)
+        self.menuTree.addSeparator()
+        self.menuTree.addAction(self.actionFavouriteStartup)
         self.menuComposition.addAction(self.actionCompositeJpg)
         self.menuComposition.addAction(self.actionCompositePdf)
         self.menuStartup.addAction(self.actionLoadFavourites)
@@ -698,5 +703,7 @@ class Ui_MainWindow(object):
         self.actionBData.setToolTip(_translate("MainWindow", "Generate manga list needed for the browser"))
         self.actionFavourites.setText(_translate("MainWindow", "Favourites"))
         self.actionLoadFavourites.setText(_translate("MainWindow", "Load Favourites"))
+        self.actionFavouriteStartup.setText(_translate("MainWindow", "Startup"))
+        self.actionFavouriteStartup.setStatusTip(_translate("MainWindow", "Reset startup favourites update check"))
 
 
