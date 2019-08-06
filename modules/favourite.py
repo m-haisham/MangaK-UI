@@ -8,6 +8,7 @@ from requests.exceptions import InvalidURL, InvalidSchema, MissingSchema
 
 from modules.settings import Settings
 
+
 class Favourite(QObject):
     on_maximum = pyqtSignal(int)
     on_progress = pyqtSignal(int)

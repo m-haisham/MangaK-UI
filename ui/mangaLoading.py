@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import *
 
 import webbrowser
 from modules.chapterList import ChapterListLoader
-from modules.jar import fave
+from modules.jar import fave, FaveThreaded
+
 
 class ThreadedMangaLoad(object):
     def __init__(self):
@@ -101,8 +102,12 @@ class ThreadedMangaLoad(object):
             item.setCheckState(Qt.Checked)
 
     def on_fave_this_clicked(self):
-        fave([self.loader.manga_link])
-        self.on_favourite_refresh()
+        _fave = FaveThreaded([self.loader.manga_link])
+
+        _fave.signal.finished.connect(lambda: self.on_favourite_refresh())
+
+        QThreadPool.globalInstance().start(_fave)
+
 
     def on_download_clicked(self):
         self.download['download_button'].setEnabled(False)

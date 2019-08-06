@@ -1,5 +1,6 @@
 import os
 import subprocess
+from PyQt5.QtCore import QRunnable, pyqtSignal, QObject
 
 from modules.settings import Settings
 
@@ -24,3 +25,18 @@ def j_call(*, file: str, args: list = []):
 
 def fave(args: list):
     return j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'mangakakalot'] + args)
+
+
+class FinishedQObject(QObject):
+    finished = pyqtSignal()
+
+
+class FaveThreaded(QRunnable):
+    def __init__(self, args):
+        super(FaveThreaded, self).__init__()
+        self.signal = FinishedQObject()
+        self.args = args
+
+    def run(self):
+        fave(args=self.args)
+        self.signal.finished.emit()
