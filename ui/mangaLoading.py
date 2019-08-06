@@ -72,9 +72,6 @@ class ThreadedMangaLoad(object):
 
             self.download['list'].addItem(item)
 
-        # TODO assign this popup to a button
-        QMessageBox.information(self, 'Updates', '\n'.join(self.loader.u_names))
-
         self.set_controls(True)
         self.download['progress_bar'].hide()
 
@@ -103,6 +100,31 @@ class ThreadedMangaLoad(object):
         elif item.checkState() == Qt.Unchecked:
             item.setCheckState(Qt.Checked)
 
+    def on_select_updates_clicked(self):
+        if not self.loader.favourited:
+            return
+
+        if len(self.loader.u_names) <= 0:
+            QMessageBox.information(self, 'Updates', 'No Updates')
+            return
+
+        dup = self.loader.u_links[:]
+        for i in range(len(self.loader.loaded_list)):
+            if len(dup) > 0 and self.loader.loaded_list[i]['href'] in dup:
+                dup.remove(self.loader.loaded_list[i]['href'])
+                self.download['list'].item(i).setCheckState(Qt.Checked)
+            else:
+                self.download['list'].item(i).setCheckState(Qt.Unchecked)
+
+    def on_show_updates_clicked(self):
+        if not self.loader.favourited:
+            return
+
+        if len(self.loader.u_names) > 0:
+            QMessageBox.information(self, 'Updated chapters', '\n'.join(self.loader.u_names))
+        else:
+            QMessageBox.information(self, 'Updates', 'No Updates')
+
     def on_fave_this_clicked(self):
         self.set_favourite_controls(False)
         _fave = FaveThreaded([self.loader.manga_link])
@@ -110,7 +132,6 @@ class ThreadedMangaLoad(object):
         _fave.signal.finished.connect(lambda: self.on_favourite_refresh())
 
         QThreadPool.globalInstance().start(_fave)
-
 
     def on_download_clicked(self):
         self.download['download_button'].setEnabled(False)
@@ -137,7 +158,7 @@ class ThreadedMangaLoad(object):
         self.on_favourite_refresh()
 
     def on_download_double_clicked(self, i: QModelIndex) -> None:
-        if self.last_double == None:
+        if self.last_double is None:
             self.last_double = i.row()
             self.previous_check = self.download['list'].item(self.last_double).checkState()
             self.download['list'].item(self.last_double).setCheckState(Qt.PartiallyChecked)

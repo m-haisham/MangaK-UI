@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Manga Downloader</string>
+   <string>MangaK</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -43,6 +43,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="top10NavButton">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Daily Top 10</string>
           </property>
@@ -50,6 +53,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="searchNavButton">
+          <property name="toolTip">
+           <string>Search for manga with name</string>
+          </property>
           <property name="text">
            <string>Search</string>
           </property>
@@ -63,6 +69,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="directNavButton">
+          <property name="toolTip">
+           <string>Search for manga with Url</string>
+          </property>
           <property name="text">
            <string>URL</string>
           </property>
@@ -76,6 +85,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="viewFunButton">
+          <property name="toolTip">
+           <string>Open manga reader</string>
+          </property>
           <property name="text">
            <string>Browser</string>
           </property>
@@ -390,43 +402,109 @@
              </property>
              <item row="0" column="0">
               <layout class="QVBoxLayout" name="verticalLayout_3">
-               <item alignment="Qt::AlignHCenter">
-                <widget class="QLabel" name="mangaTitle">
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Manga Dowload</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
                  <item>
-                  <widget class="QPushButton" name="selectAllMangaButton">
+                  <widget class="QLabel" name="mangaTitle">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>Select all</string>
+                    <string>Manga Dowload</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="ChapterBrowserPushButton">
+                  <widget class="QToolButton" name="ShowUpdatesToolButton">
+                   <property name="toolTip">
+                    <string>Display updates</string>
+                   </property>
                    <property name="text">
-                    <string>Browser</string>
+                    <string>U</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="ChapterBrowserToolButton">
+                   <property name="toolTip">
+                    <string>Open manga in browser</string>
+                   </property>
+                   <property name="text">
+                    <string>B</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QLabel" name="label_3">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>true</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Select</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="selectAllMangaButton">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
+                    <string>Select all chapters</string>
+                   </property>
+                   <property name="text">
+                    <string>All</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="inverseSelectedMangaButton">
-                   <property name="text">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
                     <string>Inverse selection</string>
+                   </property>
+                   <property name="text">
+                    <string>Inverse</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="SelectUpdatedChaptersPushButton">
+                   <property name="toolTip">
+                    <string>Select all updates</string>
+                   </property>
+                   <property name="text">
+                    <string>Updates</string>
                    </property>
                   </widget>
                  </item>
@@ -464,6 +542,9 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_8">
                  <item>
                   <widget class="QPushButton" name="FavouriteThisMangaPushButton">
+                   <property name="toolTip">
+                    <string>Favourite this manga</string>
+                   </property>
                    <property name="text">
                     <string>Fave</string>
                    </property>
@@ -471,6 +552,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="selectedMangaDownloadButton">
+                   <property name="toolTip">
+                    <string>Download all selected chapters</string>
+                   </property>
                    <property name="text">
                     <string>Download</string>
                    </property>

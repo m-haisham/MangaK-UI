@@ -161,9 +161,11 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
         self.download = {
             'title': self.findChild(QLabel, 'mangaTitle'),
+            'show_updates': self.findChild(QToolButton, 'ShowUpdatesToolButton'),
+            'browser': self.findChild(QToolButton, 'ChapterBrowserToolButton'),
             'select_all': self.findChild(QPushButton, 'selectAllMangaButton'),
-            'browser': self.findChild(QPushButton, 'ChapterBrowserPushButton'),
             'inverse': self.findChild(QPushButton, 'inverseSelectedMangaButton'),
+            'select_updates': self.findChild(QPushButton, 'SelectUpdatedChaptersPushButton'),
             'list': self.findChild(QListWidget, 'chapterListWidget'),
             'progress_bar': self.findChild(QProgressBar, 'mangaDataLoadProgressBar'),
             'fave': self.findChild(QPushButton, 'FavouriteThisMangaPushButton'),
@@ -171,10 +173,12 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         }
 
         self.download['list'].doubleClicked.connect(self.on_download_double_clicked)
+        self.download['show_updates'].clicked.connect(self.on_show_updates_clicked)
+        self.download['browser'].clicked.connect(self.on_chapter_view_browser_clicked)
         self.download['progress_bar'].hide()
         self.download['select_all'].clicked.connect(self.select_all)
-        self.download['browser'].clicked.connect(self.on_chapter_view_browser_clicked)
         self.download['inverse'].clicked.connect(self.inverse_all)
+        self.download['select_updates'].clicked.connect(self.on_select_updates_clicked)
         self.download['fave'].clicked.connect(self.on_fave_this_clicked)
         self.download['download_button'].clicked.connect(self.on_download_clicked)
 
