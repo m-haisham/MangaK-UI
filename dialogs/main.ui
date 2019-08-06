@@ -114,7 +114,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>2</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -1087,16 +1087,16 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="FavouriteGoButton">
+             <widget class="QPushButton" name="FavouriteRefreshButton">
               <property name="text">
-               <string>Go</string>
+               <string>Refresh</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="FavouriteRefreshButton">
+             <widget class="QPushButton" name="FavouriteGoButton">
               <property name="text">
-               <string>Refresh</string>
+               <string>Go</string>
               </property>
              </widget>
             </item>

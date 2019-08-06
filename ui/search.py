@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from modules.codec import MKCodec
+from modules.internet import have_internet
 
 
 class ThreadedSearch(object):
@@ -24,6 +25,8 @@ class ThreadedSearch(object):
         self.search_thread.started.connect(self.codec.search)
 
     def _search(self):
+        if not have_internet():
+            return
 
         # disable controls
         self._set_controls(False)
@@ -69,6 +72,9 @@ class ThreadedSearch(object):
         self.search['progress_bar'].hide()
 
     def _search_to_manga_download(self):
+        if not have_internet():
+            return
+
         self.search['next_button'].setEnabled(False)
         selected_index = self.search['table'].selectedIndexes()[0].row()
         self.load_manga(self.codec.search_result[selected_index]['href'])

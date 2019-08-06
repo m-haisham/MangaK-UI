@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from modules.codec import PopularPageCodec
+from modules.internet import have_internet
 from widgets.list.list_extension import PopularListItem
 
 
@@ -43,6 +44,9 @@ class PopularPage(object):
             self.popular['pageno_label'].show()
 
     def on_refresh(self):
+        if not have_internet():
+            return
+
         self.popular_button_enabled(False)
         self.popular['table'].clear()
 
@@ -57,6 +61,9 @@ class PopularPage(object):
         self.popular_thread.exit()
 
     def on_next_page(self):
+        if not have_internet():
+            return
+
         last_page = self.popular_codec.page
         self.popular_codec.increment_page()
 
@@ -64,6 +71,9 @@ class PopularPage(object):
             self.on_refresh()
     
     def on_previous_page(self):
+        if not have_internet():
+            return
+
         last_page = self.popular_codec.page
         self.popular_codec.decrement_page()
 
@@ -104,7 +114,7 @@ class PopularPage(object):
         self.popular['progress'].setValue(i)
 
     def _set_page(self):
-        self.popular['pageno_label'].setText('of {0} pages'.format(self.popular_codec.max_page))
+        self.popular['pageno_label'].setText(f'of {self.popular_codec.max_page} pages')
 
     def on_custom_page_select(self):
         try:

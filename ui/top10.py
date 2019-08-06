@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from modules.codec import Top10Codec
+from modules.internet import have_internet
 from widgets.list.list_extension import SimpleListItem
 
 class Top10List(object):
@@ -21,6 +22,9 @@ class Top10List(object):
         self.top['next_button'].setEnabled(enabled)
 
     def on_top10_refresh(self):
+        if not have_internet():
+            return
+
         self.set_buttons_enabled(False)
         self.top['list'].clear()
         self.top_thread.start()

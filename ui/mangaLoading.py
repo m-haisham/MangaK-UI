@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import *
 import webbrowser
 from modules.chapterList import ChapterListLoader
 from modules.favourite import Favourite
+from modules.internet import have_internet
 from modules.jar import fave, FaveThreaded
 
 
@@ -51,6 +52,9 @@ class ThreadedMangaLoad(object):
         self.download['progress_bar'].show()
 
     def load_manga(self, manga_link):
+        if not have_internet():
+            return
+
         self.set_controls(False)
         
         self.loader.manga_link = manga_link
@@ -126,6 +130,9 @@ class ThreadedMangaLoad(object):
             QMessageBox.information(self, 'Updates', 'No Updates')
 
     def on_fave_this_clicked(self):
+        if self.loader.manga_link == '':
+            return
+
         self.set_favourite_controls(False)
         _fave = FaveThreaded([self.loader.manga_link])
 

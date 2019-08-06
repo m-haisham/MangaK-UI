@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
 from modules.chapterList import ChapterListDownloader
+from modules.internet import have_internet
 from modules.settings import Settings
 
 class ThreadedMangaDownload(object):
@@ -20,6 +21,9 @@ class ThreadedMangaDownload(object):
         self.init_downloader_thread()
     
     def start_download_task(self, manga_title: str, chapter_list : list):
+        if not have_internet():
+            return
+
         manga_title = re.sub(r'[/\\:*"<>|\?]', '', manga_title)
         self.path = os.path.realpath(os.path.join(Settings.manga_save_path, manga_title))
         self.progress['composite_label'].setText('')

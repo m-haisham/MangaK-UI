@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from modules.favourite import Favourite
 from modules.jar import j_call
 from modules.settings import Settings
+from modules.internet import have_internet
 
 
 class FavouriteHandler(object):
@@ -30,18 +31,24 @@ class FavouriteHandler(object):
         self.favourite['progress'].show()
 
     def on_favourite_refresh(self):
+        if not have_internet():
+            return
+
         self.set_favourite_controls(False)
         self.favourite_thread.start()
 
     def on_favourite_delete(self):
         indexes = self.favourite['table'].selectedIndexes()
+        if len(indexes) <= 0:
+            return  # if none selected return
+
         rows = set()
         links = set()
         for index in indexes:
             rows.add(index.row())
             links.add(self.favourite_handle.loaded[index.row()]['url'])
 
-        j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'remove']+list(links))
+        j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'remove'] + list(links))
 
         rows = list(rows)
         while len(rows) > 0:

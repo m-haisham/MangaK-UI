@@ -1,22 +1,19 @@
-import datetime
 import os
-import re
+import logging
+import os
+import platform
 import sys
 import traceback
-import logging
-import platform
-from pyshortcuts import make_shortcut
 
-from PyQt5 import uic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from dialogs.main_window import Ui_MainWindow
-from modules.chapterList import ChapterListDownloader, ChapterListLoader
-from modules.codec import MKCodec
-from modules.html import HtmlManager
+from modules.internet import have_internet
 from modules.settings import Settings
+from modules.internet import have_internet
+from ui.favouriteHandler import FavouriteHandler
 from ui.mangaDownloading import ThreadedMangaDownload
 from ui.mangaLoading import ThreadedMangaLoad
 from ui.popular import PopularPage
@@ -24,7 +21,6 @@ from ui.search import ThreadedSearch
 from ui.top10 import Top10List
 from ui.tree_gen import ThreadedTreeGenerate
 from ui.web import ThreadedWebGenerate
-from ui.favouriteHandler import FavouriteHandler
 
 
 class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, ThreadedTreeGenerate,
@@ -250,6 +246,9 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
 
 
     def on_direct_download(self):
+        if not have_internet():
+            return
+
         self.direct['input'].setEnabled(False)
         self.load_manga(self.direct['input'].text())
 
