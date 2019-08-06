@@ -102,6 +102,7 @@ class ThreadedMangaLoad(object):
             item.setCheckState(Qt.Checked)
 
     def on_fave_this_clicked(self):
+        self.set_favourite_controls(False)
         _fave = FaveThreaded([self.loader.manga_link])
 
         _fave.signal.finished.connect(lambda: self.on_favourite_refresh())

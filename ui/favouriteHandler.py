@@ -43,8 +43,9 @@ class FavouriteHandler(object):
 
         j_call(file=Settings.kfave_path, args=[Settings.favourite_data_file, 'remove']+list(links))
 
-        for index in rows:
-            self.favourite['table'].removeRow(index)
+        rows = list(rows)
+        while len(rows) > 0:
+            self.favourite['table'].removeRow(rows.pop(-1))
 
     def on_favourite_go(self):
         indexes = self.favourite['table'].selectedIndexes()
