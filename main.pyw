@@ -9,6 +9,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+from res import res as resources
 from dialogs.main_window import Ui_MainWindow
 from modules.internet import have_internet
 from modules.settings import Settings
@@ -32,6 +33,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
         Ui_MainWindow().setupUi(self)
         self.show()
         self.setEnabled(False)
+        self.setWindowIcon(QIcon(':/logo/logok.png'))
 
         self.app = _app
 
