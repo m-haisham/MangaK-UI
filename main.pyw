@@ -9,7 +9,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from res import res as resources
 from dialogs.main_window import Ui_MainWindow
 from modules.internet import have_internet
 from modules.settings import Settings
@@ -270,7 +269,7 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
     def init_dark_palette(self):
         self.dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
         self.dark_palette.setColor(QPalette.WindowText, Qt.white)
-        self.dark_palette.setColor(QPalette.Base, QColor(25, 25, 25))
+        self.dark_palette.setColor(QPalette.Base, QColor(30, 30, 30))
         self.dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
         self.dark_palette.setColor(QPalette.ToolTipBase, Qt.white)
         self.dark_palette.setColor(QPalette.ToolTipText, Qt.white)

@@ -39,6 +39,11 @@
           <property name="text">
            <string>Popular</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normalon>:/icon/icons/popular.png</normalon>
+           </iconset>
+          </property>
          </widget>
         </item>
         <item>
@@ -49,6 +54,11 @@
           <property name="text">
            <string>Daily Top 10</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normalon>:/icon/icons/leaderboard.png</normalon>
+           </iconset>
+          </property>
          </widget>
         </item>
         <item>
@@ -58,6 +68,11 @@
           </property>
           <property name="text">
            <string>Search</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normalon>:/icon/icons/search.png</normalon>
+           </iconset>
           </property>
           <property name="default">
            <bool>false</bool>
@@ -75,6 +90,11 @@
           <property name="text">
            <string>URL</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normalon>:/icon/icons/search.png</normalon>
+           </iconset>
+          </property>
           <property name="default">
            <bool>false</bool>
           </property>
@@ -90,6 +110,11 @@
           </property>
           <property name="text">
            <string>Browser</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normalon>:/icon/icons/open-in-browser.png</normalon>
+           </iconset>
           </property>
           <property name="autoDefault">
            <bool>false</bool>
@@ -157,6 +182,11 @@
                   <widget class="QPushButton" name="mangaSearchButton">
                    <property name="text">
                     <string>Search</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/search.png</normalon>
+                    </iconset>
                    </property>
                   </widget>
                  </item>
@@ -235,6 +265,11 @@
                   <widget class="QPushButton" name="searchNextButton">
                    <property name="text">
                     <string>Next</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/right.png</normalon>
+                    </iconset>
                    </property>
                    <property name="default">
                     <bool>false</bool>
@@ -361,6 +396,11 @@
                  <property name="text">
                   <string>Next</string>
                  </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icon/icons/right.png</normalon>
+                  </iconset>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -429,6 +469,11 @@
                    <property name="text">
                     <string>U</string>
                    </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/available-updates.png</normalon>
+                    </iconset>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -438,6 +483,11 @@
                    </property>
                    <property name="text">
                     <string>B</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/open-in-browser.png</normalon>
+                    </iconset>
                    </property>
                   </widget>
                  </item>
@@ -548,6 +598,11 @@
                    <property name="text">
                     <string>Fave</string>
                    </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/add-to-favorites.png</normalon>
+                    </iconset>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -557,6 +612,11 @@
                    </property>
                    <property name="text">
                     <string>Download</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/download.png</normalon>
+                    </iconset>
                    </property>
                   </widget>
                  </item>
@@ -843,6 +903,11 @@
                    <property name="text">
                     <string>Open directory</string>
                    </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/folder.png</normalon>
+                    </iconset>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -940,6 +1005,11 @@
                    <property name="text">
                     <string>Previous Page</string>
                    </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/previous.png</normalon>
+                    </iconset>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -947,12 +1017,22 @@
                    <property name="text">
                     <string>Refresh</string>
                    </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/refresh.png</normalon>
+                    </iconset>
+                   </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="nextPopularButton">
                    <property name="text">
                     <string>Next Page</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/next.png</normalon>
+                    </iconset>
                    </property>
                   </widget>
                  </item>
@@ -1017,6 +1097,11 @@
                  <property name="text">
                   <string>Next</string>
                  </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icon/icons/right.png</normalon>
+                  </iconset>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -1060,12 +1145,22 @@
                 <property name="text">
                  <string>Refresh</string>
                 </property>
+                <property name="icon">
+                 <iconset>
+                  <normalon>:/icon/icons/refresh.png</normalon>
+                 </iconset>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="nextTopButton">
                 <property name="text">
                  <string>Next</string>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normalon>:/icon/icons/right.png</normalon>
+                 </iconset>
                 </property>
                </widget>
               </item>
@@ -1084,6 +1179,11 @@
               <property name="text">
                <string>Remove</string>
               </property>
+              <property name="icon">
+               <iconset>
+                <normalon>:/icon/icons/remove.png</normalon>
+               </iconset>
+              </property>
              </widget>
             </item>
             <item>
@@ -1091,12 +1191,22 @@
               <property name="text">
                <string>Refresh</string>
               </property>
+              <property name="icon">
+               <iconset>
+                <normalon>:/icon/icons/refresh.png</normalon>
+               </iconset>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="FavouriteGoButton">
               <property name="text">
                <string>Go</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normalon>:/icon/icons/right.png</normalon>
+               </iconset>
               </property>
              </widget>
             </item>
@@ -1199,6 +1309,8 @@
     <addaction name="actionFavourites"/>
     <addaction name="actionDownloadsView"/>
     <addaction name="separator"/>
+    <addaction name="actionCompositeDirectory"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTree">
@@ -1261,6 +1373,11 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/exit-sign.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -1313,11 +1430,21 @@
    </property>
   </action>
   <action name="actionDocumentation">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/doc.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Documentation</string>
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/info.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -1331,11 +1458,21 @@
    </property>
   </action>
   <action name="actionChapterView">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/list.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Chapters</string>
    </property>
   </action>
   <action name="actionDownloadsView">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/loading-bar.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Downloads</string>
    </property>
@@ -1382,6 +1519,11 @@
    </property>
   </action>
   <action name="actionFavourites">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/favorite-folder.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Favourites</string>
    </property>
@@ -1405,9 +1547,20 @@
     <string/>
    </property>
   </action>
+  <action name="actionCompositeDirectory">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon/icons/archive-folder.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Composite</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../res/res.qrc"/>
+  <include location="../res/img.qrc"/>
  </resources>
  <connections/>
 </ui>
