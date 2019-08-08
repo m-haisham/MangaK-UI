@@ -1373,11 +1373,6 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/exit-sign.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -1430,21 +1425,11 @@
    </property>
   </action>
   <action name="actionDocumentation">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/doc.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Documentation</string>
    </property>
   </action>
   <action name="actionAbout">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/info.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -1458,21 +1443,11 @@
    </property>
   </action>
   <action name="actionChapterView">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/list.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Chapters</string>
    </property>
   </action>
   <action name="actionDownloadsView">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/loading-bar.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Downloads</string>
    </property>
@@ -1519,11 +1494,6 @@
    </property>
   </action>
   <action name="actionFavourites">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/favorite-folder.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Favourites</string>
    </property>
@@ -1548,11 +1518,6 @@
    </property>
   </action>
   <action name="actionCompositeDirectory">
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon/icons/archive-folder.png</normalon>
-    </iconset>
-   </property>
    <property name="text">
     <string>Composite</string>
    </property>
