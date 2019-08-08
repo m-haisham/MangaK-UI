@@ -139,7 +139,7 @@
       <item>
        <widget class="QStackedWidget" name="dynamicStack">
         <property name="currentIndex">
-         <number>5</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="Search">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -882,6 +882,18 @@
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="BackToChaptersPushButton">
+                   <property name="text">
+                    <string>Chapters</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normalon>:/icon/icons/list.png</normalon>
+                    </iconset>
+                   </property>
+                  </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="progressOpenDirectoryButton">

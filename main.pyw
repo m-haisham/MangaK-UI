@@ -194,8 +194,12 @@ class Ui(QMainWindow, ThreadedSearch, ThreadedMangaLoad, ThreadedMangaDownload, 
             'page_progress': self.findChild(QProgressBar, 'pageDownloadProgressBar'),
 
             'composite_label': self.findChild(QLabel, 'compositingLabel'),
+            'chapter_list': self.findChild(QPushButton, 'BackToChaptersPushButton'),
             'open_button': self.findChild(QPushButton, 'progressOpenDirectoryButton')
         }
+
+        self.progress['chapter_list'].hide()
+        self.progress['chapter_list'].clicked.connect(lambda: self.stack.setCurrentIndex(2))
 
         self.progress['open_button'].hide()
         self.progress['open_button'].clicked.connect(self.on_progress_open_clicked)

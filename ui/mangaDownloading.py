@@ -27,6 +27,7 @@ class ThreadedMangaDownload(object):
         manga_title = re.sub(r'[/\\:*"<>|\?]', '', manga_title)
         self.path = os.path.realpath(os.path.join(Settings.manga_save_path, manga_title))
         self.progress['composite_label'].setText('')
+        self.progress['chapter_list'].hide()
         self.progress['open_button'].hide()
         self.stack.setCurrentIndex(3)
 
@@ -69,6 +70,7 @@ class ThreadedMangaDownload(object):
 
         self.progress['composite_label'].setText('Download Task Finished!')
         self.download['download_button'].setEnabled(True)
+        self.progress['chapter_list'].show()
         self.progress['open_button'].show()
 
     def download_resume_init(self):
