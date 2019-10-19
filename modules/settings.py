@@ -10,7 +10,7 @@ class Settings:
     manga_tree_name = 'tree'
     web_files_location = 'web'
     download_log = 'dlog.json'
-    mangakakalot_home = 'https://mangakakalot.com/page'
+    mangakakalot_home = 'https://mangakakalot.com'
     web_keybinding = 'keybinding.js'
 
     kfave_path = 'Kfave.jar'
